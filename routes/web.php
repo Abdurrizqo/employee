@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardSuperAdmin;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,4 +15,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/super-admin-login-page', [LoginController::class, 'superAdminloginPage']);
+Route::get('/super-admin', [LoginController::class, 'superAdminloginPage']);
+Route::get('/super-admin/dashboard', [DashboardSuperAdmin::class, 'dashboardSuperAdmin']);
