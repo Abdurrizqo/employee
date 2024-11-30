@@ -15,7 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary(); // Primary Key
             $table->uuid('id_user'); // Foreign Key
             $table->string('nama_lengkap');
-            $table->string('nomer_induk_warga');
+            $table->string('nomer_induk_warga')->unique();
             $table->string('nomer_induk_keluarga');
             $table->string('tempat_lahir');
             $table->date('tanggal_lahir');

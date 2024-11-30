@@ -4,11 +4,11 @@
     <div class="border rounded-lg p-3 w-full bg-white mb-3">
         <form class="grid grid-cols-1 sm:grid-cols-2 gap-8">
             <div>
-                <label for="nama_anggota" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama
-                    Anggota</label>
-                <input type="text" id="nama_anggota"
+                <label for="nama_admin" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama
+                    Admin</label>
+                <input type="text" id="nama_admin"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                    placeholder="nama anggota" required />
+                    placeholder="nama admin" required />
             </div>
 
             <div>
@@ -39,7 +39,7 @@
             <div class="sm:col-start-2 flex justify-end">
                 <button
                     class="w-full sm:w-60 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5">Simpan
-                    Data Anggota</button>
+                    Data Admin</button>
             </div>
         </form>
     </div>
@@ -52,8 +52,8 @@
                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5">Cari</button>
         </div>
 
-        <div class="relative overflow-auto">
-            {{-- <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+        <div class="relative overflow-x-auto">
+            <table class="w-full text-sm text-left rtl:text-right text-gray-500">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700">
                     <tr>
                         <th scope="col" class="px-6 py-3 sticky w-20 text-center">
@@ -97,16 +97,12 @@
                         </td>
                         <td class="px-6 py-4">
                             <div class="inline-flex rounded-md shadow-sm items-center justify-center w-full">
-                                <button aria-current="page"
-                                    class="px-8 py-2 text-sm font-medium text-white bg-green-600 rounded-s-lg hover:bg-green-500 focus:z-10 focus:ring-2">
+                                <button href="#" aria-current="page"
+                                    class="px-8 py-2 text-sm font-medium text-white bg-green-600 borde rounded-s-lg hover:bg-green-500 focus:z-10 focus:ring-2">
                                     Edit
                                 </button>
-                                <button type="button"
-                                    class="px-4 py-2 text-sm font-medium text-white bg-orange-400 border-t border-b hover:bg-orange-300 hover:text-white focus:z-10 focus:ring-2 focus:ring-orange-300">
-                                    Settings
-                                </button>
-                                <button
-                                    class="px-8 py-2 text-sm font-medium text-white bg-red-600 rounded-e-lg hover:bg-red-500">
+                                <button href="#"
+                                    class="px-8 py-2 text-sm font-medium text-white bg-red-600 border rounded-e-lg hover:bg-red-500">
                                     Delete
                                 </button>
                             </div>
@@ -114,7 +110,7 @@
                         </td>
                     </tr>
                 </tbody>
-            </table> --}}
+            </table>
         </div>
     </div>
 @endsection

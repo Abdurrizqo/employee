@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('rantings', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('nama_ranting', 240);
+            $table->boolean('is_active');
             $table->timestamps();
         });
     }

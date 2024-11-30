@@ -21,5 +21,6 @@ class Ranting extends Model
 
     protected $fillable = [
         'nama_ranting',
+        'is_active',
     ];
 }
