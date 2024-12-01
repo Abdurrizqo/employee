@@ -23,7 +23,6 @@ Route::prefix('super-admin')->group(function () {
     Route::get('/dashboard', [DashboardSuperAdmin::class, 'dashboardSuperAdmin']);
     Route::get('/list-ranting', [DashboardSuperAdmin::class, 'listRantingPage']);
     Route::get('/list-admin', [DashboardSuperAdmin::class, 'listAdminPage']);
-    Route::get('/list-anggota', [DashboardSuperAdmin::class, 'listAnggotaPage']);
 });
 
 Route::get('/admin-login', [LoginController::class, 'adminloginPage']);
@@ -35,11 +34,11 @@ Route::get('/user-login', [LoginController::class, 'userloginPage']);
 
 Route::get('/data-ranting/all', [RantingController::class, 'getAllRanting']);
 Route::get('/data-ranting/aktif', [RantingController::class, 'getAllRatingActive']);
-Route::get('/data-ranting/create', [RantingController::class, 'store']);
-Route::get('/data-ranting/update', [RantingController::class, 'update']);
-Route::get('/data-ranting/switch', [RantingController::class, 'switchStatus']);
+Route::post('/data-ranting/create', [RantingController::class, 'store']);
+Route::put('/data-ranting/update', [RantingController::class, 'update']);
+Route::put('/data-ranting/switch', [RantingController::class, 'switchStatus']);
 
-Route::get('/data-ranting/all', [AdminController::class, 'getAllAdmins']);
-Route::get('/data-ranting/create', [AdminController::class, 'createAdmin']);
-Route::get('/data-ranting/update', [AdminController::class, 'updateAdmin']);
-Route::get('/data-ranting/switch', [AdminController::class, 'switchStatus']);
+Route::get('/data-admin/all', [AdminController::class, 'getAllAdmins']);
+Route::post('/data-admin/create', [AdminController::class, 'createAdmin']);
+Route::put('/data-admin/update', [AdminController::class, 'updateAdmin']);
+Route::put('/data-admin/switch', [AdminController::class, 'switchStatus']);

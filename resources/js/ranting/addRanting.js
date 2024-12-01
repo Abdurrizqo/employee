@@ -1,3 +1,6 @@
+import axios from "axios";
+import getRanting from "./getRanting";
+
 const ratingForm = document.getElementById("ratingForm");
 
 // Add event listener for form submission
@@ -16,19 +19,18 @@ ratingForm.addEventListener("submit", function (event) {
     }
 
     // If validation passes, you can proceed with your logic (e.g., send data to server)
+    const csrfToken = document.querySelector('input[name="_token"]').value;
     const formData = {
-        nama_rating: namaRantingValue,
+        nama_ranting: namaRantingValue,
+        _token: csrfToken
     };
 
-    // Example: Log the form data to the console
-    console.log("Form submitted with data:", formData);
 
-    // Optionally, send the data via fetch or another method
-    // fetch('/api/rating', {
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify(formData),
-    // }).then(response => response.json())
-    //   .then(data => console.log(data))
-    //   .catch(error => console.error('Error:', error));
+    axios.post('/data-ranting/create', formData)
+        .then((response) => {
+            getRanting();  // Panggil fungsi untuk mendapatkan data ranting
+        })
+        .catch((error) => {
+            console.error('Simpan data gagal', error);
+        });
 });

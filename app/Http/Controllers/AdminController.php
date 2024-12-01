@@ -11,7 +11,6 @@ class AdminController extends Controller
     public function getAllAdmins(Request $request)
     {
         $search = $request->input('search');
-        $perPage = $request->input('per_page', 10); // Default pagination size: 10 items per page
 
         $query = Admin::query();
 
@@ -28,7 +27,7 @@ class AdminController extends Controller
         }
 
         // Paginate hasil
-        $admins = $query->with('ranting')->paginate($perPage);
+        $admins = $query->with('ranting')->paginate(10);
 
         return response()->json([
             'success' => true,

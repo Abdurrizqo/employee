@@ -3,11 +3,12 @@
 @section('content')
     <div class="border rounded-lg p-3 w-full bg-white">
         <form id="ratingForm">
+            @csrf
             <div class="grid gap-6 grid-cols-1 md:grid-cols-[80%_1fr]">
                 <div>
                     <input type="text" id="ranting_name"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                        placeholder="nama rating" required />
+                        placeholder="nama ranting" required />
                 </div>
                 <div>
                     <button type="submit"
@@ -38,11 +39,13 @@
     </div>
 
     <div class="flex-grow border rounded-lg p-3 w-full bg-white overflow-y-auto">
-        <div class="flex gap-4 ites-center flex-1 mb-8">
+        <div class="flex gap-4 items-center flex-1 mb-8">
             <input type="text" name="search" id="search" placeholder="cari..."
                 class="border border-gray-400 rounded-md px-3 w-1/2 md:w-1/4 bg-gray-50">
-            <button
-                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5">Cari</button>
+            <button id="search-btn"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5">
+                Cari
+            </button>
         </div>
 
         <div class="relative overflow-x-auto">
@@ -64,34 +67,10 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr
-                        class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            1
-                        </th>
-                        <td class="px-6 py-4">
-                            Silver
-                        </td>
-                        <td class="px-6 py-4 text-center">
-                            Aktif
-                        </td>
-                        <td class="px-6 py-4">
-                            <div class="inline-flex rounded-md shadow-sm items-center justify-center w-full">
-                                <button href="#" aria-current="page"
-                                    class="px-8 py-2 text-sm font-medium text-white bg-green-600 borde rounded-s-lg hover:bg-green-500 focus:z-10 focus:ring-2">
-                                    Edit
-                                </button>
-                                <button href="#"
-                                    class="px-8 py-2 text-sm font-medium text-white bg-red-600 border rounded-e-lg hover:bg-red-500">
-                                    Delete
-                                </button>
-                            </div>
-
-                        </td>
-                    </tr>
+                    <!-- Data akan diisi oleh JavaScript -->
                 </tbody>
             </table>
         </div>
     </div>
-    @vite(['resources/js/ranting/addRanting.js'])
+    @vite(['resources/js/ranting/addRanting.js', 'resources/js/ranting/getRanting.js'])
 @endsection

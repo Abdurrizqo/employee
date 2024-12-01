@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('admins', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('username', 120)->unique();
-            $table->string('password', 20);
+            $table->string('password');
             $table->string('nama_admin', 240);
             $table->boolean('is_active')->default(true);
             $table->uuid('id_ranting');
