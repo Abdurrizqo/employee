@@ -50,15 +50,15 @@
         </form>
     </div>
 
-    <div class="flex-grow border rounded-lg p-3 w-full bg-white overflow-y-auto">
-        <div class="flex gap-4 ites-center flex-1 mb-8">
+    <div class="w-full border rounded-lg p-3 bg-white overflow-x-auto">
+        <div class="flex gap-4 ites-center mb-8">
             <input type="text" name="search" id="search" placeholder="cari..."
                 class="border border-gray-400 rounded-md px-3 w-1/2 md:w-1/4 bg-gray-50">
-            <button
+            <button id="search-btn"
                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5">Cari</button>
         </div>
 
-        <div class="relative overflow-x-auto">
+        <div class="relative">
             <table class="w-full text-sm text-left rtl:text-right text-gray-500">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700">
                     <tr>

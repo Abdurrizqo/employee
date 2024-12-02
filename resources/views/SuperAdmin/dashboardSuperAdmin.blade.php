@@ -1,7 +1,7 @@
 @extends('SuperAdmin.layoutSuperAdmin')
 
 @section('content')
-    <div class="border rounded-lg p-3 w-full bg-white mb-3">
+    <div class="border rounded-lg p-3 w-full bg-white">
         <form class="grid grid-cols-1 sm:grid-cols-2 gap-8">
             <div>
                 <label for="nama_anggota" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama
@@ -47,7 +47,7 @@
         <div class="flex gap-4 ites-center flex-1 mb-8">
             <input type="text" name="search" id="search" placeholder="cari..."
                 class="border border-gray-400 rounded-md px-3 w-1/2 md:w-1/4 bg-gray-50">
-            <button
+            <button id="search-btn"
                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5">Cari</button>
         </div>
 
