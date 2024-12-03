@@ -40,5 +40,5 @@ Route::put('/data-ranting/switch', [RantingController::class, 'switchStatus']);
 
 Route::get('/data-admin/all', [AdminController::class, 'getAllAdmins']);
 Route::post('/data-admin/create', [AdminController::class, 'createAdmin']);
-Route::put('/data-admin/update', [AdminController::class, 'updateAdmin']);
-Route::put('/data-admin/switch', [AdminController::class, 'switchStatus']);
+Route::put('/data-admin/update/{id}', [AdminController::class, 'updateAdmin']);
+Route::put('/data-admin/switch/{id}', [AdminController::class, 'switchStatus']);

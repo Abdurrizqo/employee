@@ -70,7 +70,7 @@
     </div>
 
     <!-- Main Content -->
-    <div class="p-3 col-start-2 rounded-lg flex flex-col gap-3 overflow-x-hidden">
+    <div class="p-3 col-start-2 rounded-lg flex flex-col gap-3 overflow-x-auto">
         @yield('content')
     </div>
 </body>

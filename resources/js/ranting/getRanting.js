@@ -29,7 +29,7 @@ function getRanting() {
                     ranting.is_active ? "text-green-500" : "text-red-500"
                 } ">${ranting.is_active ? "Aktif" : "Tidak Aktif"}</td>
                 <td class="px-6 py-4 text-center">
-                    <div class="inline-flex rounded-md shadow-sm items-center justify-center w-full">
+                    <div class="inline-flex rounded-md items-center justify-center w-full">
                         <button type='button' class="edit-btn px-8 py-2 text-sm font-medium text-white bg-green-600 border rounded-s-lg hover:bg-green-500 focus:z-10 focus:ring-2">
                             Edit
                         </button>
@@ -74,7 +74,7 @@ function getRanting() {
                     ranting.is_active ? "Aktif" : "Tidak Aktif"
                 }</td>
                 <td class="px-6 py-4 text-center">
-                    <div class="inline-flex rounded-md shadow-sm items-center justify-center w-full">
+                    <div class="inline-flex rounded-md items-center justify-center w-full">
                         <button type='button' class="edit-btn px-8 py-2 text-sm font-medium text-white bg-green-600 border rounded-s-lg hover:bg-green-500 focus:z-10 focus:ring-2">
                             Edit
                         </button>
