@@ -4,15 +4,15 @@
     <div class="fixed top-0 bottom-0 left-0 right-0 bg-black/40 justify-center items-center z-30 hidden" id="modalDelete">
         <div class="bg-white w-[80%] md:w-[50%] lg:w-[30%] rounded p-4">
             <div class="border-b pb-1 text-red-600 font-medium">
-                <p>Delete Admin ?</p>
+                <p id="titleModal"></p>
             </div>
 
             <div class="my-10">
-                <p class="text-gray-400 text-center text-lg">Lanjutkan Menonaktifkan Data</p>
+                <p class="text-gray-400 text-center text-lg" id="contentModal">Lanjut Menonaktifkan Data</p>
 
                 <div class="mt-4 flex items-center justify-center gap-4">
                     <button class="bg-white hover:bg-gray-100 border rounded-md w-24 py-1" id="btnBatalDelete">Batal</button>
-                    <button class="bg-red-500 hover:bg-red-600 text-white w-24 py-1 rounded" id="btnDelete">Delete</button>
+                    <button class="bg-red-500 hover:bg-red-600 text-white w-24 py-1 rounded" id="btnDelete"></button>
                 </div>
             </div>
         </div>

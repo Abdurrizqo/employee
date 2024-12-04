@@ -1,36 +1,60 @@
-import axios from "axios";
-import getRanting from "./getRanting";
+import $ from "jquery";
+import fetchAndRenderTable from "./getRanting";
 
-const ratingForm = document.getElementById("ratingForm");
+$(document).ready(function () {
+    $("#ratingForm").on("submit", function (e) {
+        e.preventDefault();
+        const rantingName = $("#ranting_name").val().trim(); // Ambil nilai dari input pencarian
+        const csrfToken = document.querySelector('input[name="_token"]').value;
 
-// Add event listener for form submission
-ratingForm.addEventListener("submit", function (event) {
-    event.preventDefault(); // Prevent default form submission behavior
+        if (!rantingName) {
+            $("#rantingNameError").removeClass("hidden");
+        } else {
+            $("#rantingNameError").addClass("hidden"); // Sembunyikan pesan error jika input valid
+        }
 
-    // Get the input value
-    const namaRantingInput = document.getElementById("ranting_name");
-    const namaRantingValue = namaRantingInput.value.trim(); // Trim whitespace
+        const formData = {
+            nama_ranting: rantingName,
+            _token: csrfToken,
+        };
 
-    // Validate the input value
-    if (!namaRantingValue) {
-        alert("Nama ranting tidak boleh kosong!");
-        namaRantingInput.focus(); // Focus the input field for user correction
-        return;
-    }
+        $("#buttonText").addClass("hidden"); // Sembunyikan teks "Simpan"
+        $("#spinnerAdd").removeClass("hidden");
 
-    // If validation passes, you can proceed with your logic (e.g., send data to server)
-    const csrfToken = document.querySelector('input[name="_token"]').value;
-    const formData = {
-        nama_ranting: namaRantingValue,
-        _token: csrfToken
-    };
+        axios
+            .post("/data-ranting/create", formData)
+            .then((response) => {
+                fetchAndRenderTable();
+                $("#ranting_name").val("");
 
-
-    axios.post('/data-ranting/create', formData)
-        .then((response) => {
-            getRanting();  // Panggil fungsi untuk mendapatkan data ranting
-        })
-        .catch((error) => {
-            console.error('Simpan data gagal', error);
-        });
+                $("#buttonText").removeClass("hidden");
+                $("#spinnerAdd").addClass("hidden");
+                showNotification("Tambah Ranting Berhasil", "successMessage");
+            })
+            .catch((error) => {
+                $("#buttonText").removeClass("hidden");
+                $("#spinnerAdd").addClass("hidden");
+                showNotification(`Tambah Ranting Gagal ${error}`, 'errorMessage');
+            });
+    });
 });
+
+function showNotification(message, type) {
+    const notification = $("#notificationMessage");
+
+    // Set kelas berdasarkan tipe (success atau error)
+    notification
+        .removeClass("hidden successMessage errorMessage") // Hapus kelas sebelumnya
+        .addClass(type); // Tambahkan kelas berdasarkan tipe
+
+    // Set teks pesan
+    notification.text(message);
+
+    // Tampilkan elemen
+    notification.removeClass("hidden");
+
+    // Sembunyikan elemen setelah 12 detik
+    setTimeout(() => {
+        notification.addClass("hidden");
+    }, 6000); // 12000ms = 12 detik
+}

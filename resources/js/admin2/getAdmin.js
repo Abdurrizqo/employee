@@ -291,7 +291,14 @@ document.addEventListener("DOMContentLoaded", function () {
             const row = e.target.closest("tr");
             const adminId = row.getAttribute("data-id"); // Ambil ID dari data-id
 
+            const selectedItem = fetchingResult.find((item) => {
+                return item.id === adminId;
+            });
+
             const modalDelete = document.getElementById("modalDelete");
+            document.getElementById('contentModal').innerHTML = selectedItem.is_active ?'Lanjutkan menonaktifkan admin':'Lanjutkan mengaktifkan admin';
+            document.getElementById('titleModal').innerHTML = selectedItem.is_active ?'Non aktifkan admin?':'Aktifkan admin?';
+            document.getElementById("btnDelete").innerHTML = selectedItem.is_active ?'Delete?':'Aktifkan';
             modalDelete.classList.add("flex");
             modalDelete.classList.remove("hidden");
             selectDelete = adminId;

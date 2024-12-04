@@ -35,8 +35,8 @@ Route::get('/user-login', [LoginController::class, 'userloginPage']);
 Route::get('/data-ranting/all', [RantingController::class, 'getAllRanting']);
 Route::get('/data-ranting/aktif', [RantingController::class, 'getAllRatingActive']);
 Route::post('/data-ranting/create', [RantingController::class, 'store']);
-Route::put('/data-ranting/update', [RantingController::class, 'update']);
-Route::put('/data-ranting/switch', [RantingController::class, 'switchStatus']);
+Route::put('/data-ranting/update/{id}', [RantingController::class, 'update']);
+Route::put('/data-ranting/switch/{id}', [RantingController::class, 'switchStatus']);
 
 Route::get('/data-admin/all', [AdminController::class, 'getAllAdmins']);
 Route::post('/data-admin/create', [AdminController::class, 'createAdmin']);
