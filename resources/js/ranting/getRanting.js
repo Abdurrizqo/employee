@@ -18,20 +18,17 @@ function fetchAndRenderTable(searchTerm = "") {
             // Loop melalui data dan tambahkan ke tabel
             resultFetchingRanting.forEach((ranting, index) => {
                 const row = `
-                    <tr data-id="${
-                        ranting.id
+                    <tr data-id="${ranting.id
                     }" class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center">
                             ${index + 1}
                         </th>
-                        <td class="px-6 py-4 text-center">${
-                            ranting.nama_ranting
-                        }</td>
-                        <td class="px-6 py-4 text-center ${
-                            ranting.is_active
-                                ? "text-green-500"
-                                : "text-red-500"
-                        }">
+                        <td class="px-6 py-4 text-center">${ranting.nama_ranting
+                    }</td>
+                        <td class="px-6 py-4 text-center ${ranting.is_active
+                        ? "text-green-500"
+                        : "text-red-500"
+                    }">
                             ${ranting.is_active ? "Aktif" : "Tidak Aktif"}
                         </td>
                         <td class="px-6 py-4 text-center">
@@ -39,17 +36,14 @@ function fetchAndRenderTable(searchTerm = "") {
                                 <button type='button' class="edit-btn px-8 py-2 text-sm font-medium text-white bg-green-600 border rounded-s-lg hover:bg-green-500 focus:z-10 focus:ring-2">
                                     Edit
                                 </button>
-                                ${
-                                    ranting.is_active
-                                        ? "<button type='button' class='delete-btn px-8 py-2 text-sm font-medium text-white bg-red-600 border rounded-e-lg hover:bg-red-500'> Non Aktif </button>"
-                                        : "<button type='button' class='delete-btn px-8 py-2 text-sm font-medium text-white bg-blue-600 border rounded-e-lg hover:bg-blue-500'> Aktif </button>"
-                                }
+                                ${ranting.is_active
+                        ? "<button type='button' class='delete-btn px-8 py-2 text-sm font-medium text-white bg-red-600 border rounded-e-lg hover:bg-red-500'> Non Aktif </button>"
+                        : "<button type='button' class='delete-btn px-8 py-2 text-sm font-medium text-white bg-blue-600 border rounded-e-lg hover:bg-blue-500'> Aktif </button>"
+                    }
                             </div>
                         </td>
                     </tr>`;
                 tbody.append(row);
-
-                return resultFetchingRanting;
             });
         })
         .catch((error) => {
@@ -115,22 +109,41 @@ $(document).ready(function () {
         $("#idDelete").val("");
     });
 
-    ///FOKUS DISINI
-    ///FOKUS DISINI
-    ///FOKUS DISINI
-    ///FOKUS DISINI
-    ///FOKUS DISINI
-    ///FOKUS DISINI
     $(document).on("click", "#btnDelete", function () {
         $("#spinnerDelete").removeClass("hidden");
         $("#buttonTextDelete").addClass("hidden");
         $("#btnBatalDelete").prop("disabled", true);
 
-        // $("#modalDelete").removeClass("flex");
-        // $("#modalDelete").addClass("hidden");
-        // $("#titleModal").text("");
-        // $("#buttonTextDelete").text("");
-        // $("#idDelete").val("");
+        const rantingId = $("#idDelete").val().trim();
+
+        axios
+            .put(`/data-ranting/switch/${rantingId}`)
+            .then((response) => {
+                $("#buttonTextDelete").removeClass("hidden");
+                $("#buttonTextDelete").text("");
+                $("#spinnerDelete").addClass("hidden");
+                $("#btnBatalDelete").prop("disabled", false);
+
+                $("#modalDelete").removeClass("flex");
+                $("#modalDelete").addClass("hidden");
+                $("#titleModal").text("");
+                $("#idDelete").val("");
+                showNotification("Edit Ranting Berhasil", "successMessage");
+            })
+            .catch((error) => {
+                $("#buttonTextDelete").removeClass("hidden");
+                $("#buttonTextDelete").text("");
+                $("#spinnerDelete").addClass("hidden");
+                $("#btnBatalDelete").prop("disabled", false);
+
+                $("#modalDelete").removeClass("flex");
+                $("#modalDelete").addClass("hidden");
+                $("#titleModal").text("");
+                $("#idDelete").val("");
+                showNotification(`Edit Ranting Gagal ${error}`, "errorMessage");
+            });
+
+
     });
 
     $(document).on("click", "#btnBatalEdit", function () {
@@ -196,7 +209,7 @@ function showNotification(message, type) {
 
     setTimeout(() => {
         notification.addClass("hidden");
-    }, 6000);
+    }, 4000);
 }
 
 export default fetchAndRenderTable;

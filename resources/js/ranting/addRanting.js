@@ -56,5 +56,5 @@ function showNotification(message, type) {
     // Sembunyikan elemen setelah 12 detik
     setTimeout(() => {
         notification.addClass("hidden");
-    }, 6000); // 12000ms = 12 detik
+    }, 4000); // 12000ms = 12 detik
 }

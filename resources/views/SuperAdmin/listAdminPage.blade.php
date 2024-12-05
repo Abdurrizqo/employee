@@ -11,12 +11,32 @@
                 <p class="text-gray-400 text-center text-lg" id="contentModal">Lanjut Menonaktifkan Data</p>
 
                 <div class="mt-4 flex items-center justify-center gap-4">
-                    <button class="bg-white hover:bg-gray-100 border rounded-md w-24 py-1" id="btnBatalDelete">Batal</button>
-                    <button class="bg-red-500 hover:bg-red-600 text-white w-24 py-1 rounded" id="btnDelete"></button>
+                    <input type="hidden" id="idDelete">
+                    <button class="bg-white hover:bg-gray-100 border rounded-md w-32 py-1"
+                        id="btnBatalDelete">Batal</button>
+                    <button
+                        class="bg-red-500 hover:bg-red-600 text-white w-32 py-1 rounded flex items-center justify-center"
+                        id="btnDelete">
+                        <span id="buttonTextDelete"></span>
+                        <div id="spinnerDelete"
+                            class="w-5 h-5 border-2 border-t-transparent border-white rounded-full animate-spin hidden">
+                        </div>
+                    </button>
                 </div>
             </div>
         </div>
     </div>
+
+    <div id="spinner" class="flex">
+        <div class="lds-ring">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
+    <div id="notificationMessage" class="border rounded-lg p-3 w-full hidden"></div>
 
     <div class="border rounded-lg p-3 w-full bg-white mb-3" id="containerAdd">
         <form id="adminForm" class="grid grid-cols-1 sm:grid-cols-2 gap-8">
@@ -124,11 +144,15 @@
     </div>
 
     <div class="w-full border rounded-lg p-3 bg-white overflow-x-auto">
-        <div class="flex gap-4 ites-center mb-8">
-            <input type="text" name="search" id="search" placeholder="cari..."
-                class="border border-gray-400 rounded-md px-3 w-1/2 md:w-1/4 bg-gray-50">
-            <button id="search-btn"
-                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5">Cari</button>
+        <div class="flex gap-4 items-center flex-1 mb-8">
+            <form id="searchForm">
+                <input type="text" name="search" id="search" placeholder="cari..."
+                    class="border border-gray-400 rounded-md px-3 sm:w-[20rem] bg-gray-50">
+                <button
+                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5">
+                    Cari
+                </button>
+            </form>
         </div>
 
         <div class="relative">
@@ -155,7 +179,7 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="adminTableBody">
                 </tbody>
             </table>
         </div>
@@ -167,5 +191,5 @@
         </div>
     </div>
 
-    @vite(['resources/js/admin/addAdmin.js', 'resources/js/admin/getAdmin.js', 'resources/js/admin/editAdmin.js'])
+    @vite(['resources/js/admin/addAdmin.js', 'resources/js/admin/getAdmin.js'])
 @endsection
