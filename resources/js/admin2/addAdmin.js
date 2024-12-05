@@ -1,70 +1,74 @@
 import axios from "axios";
 import getAdmin from "./getAdmin";
+import $ from "jquery";
+import fetchAndRenderTable from "../admin/getAdmin";
 
-document
-    .getElementById("adminForm")
-    .addEventListener("submit", function (event) {
-        event.preventDefault(); // Mencegah pengiriman form jika ada error
+$("#adminForm").on("submit", function (event) {
+    event.preventDefault(); // Mencegah pengiriman form jika ada error
 
-        // Ambil nilai input
-        const namaAdmin = document.getElementById("nama_admin").value.trim();
-        const username = document.getElementById("username").value.trim();
-        const password = document.getElementById("password").value.trim();
-        const ranting = document.getElementById("ranting").value;
+    // Ambil nilai input
+    const namaAdmin = $("#nama_admin").val().trim();
+    const username = $("#username").val().trim();
+    const password = $("#password").val().trim();
+    const ranting = $("#ranting").val();
 
-        // Ambil elemen error
-        const namaAdminError = document.getElementById("namaAdminError");
-        const usernameError = document.getElementById("usernameError");
-        const passwordError = document.getElementById("passwordError");
-        const rantingError = document.getElementById("rantingError");
+    // Ambil elemen error
+    const namaAdminError = $("#namaAdminError");
+    const usernameError = $("#usernameError");
+    const passwordError = $("#passwordError");
+    const rantingError = $("#rantingError");
 
-        let isValid = true;
+    let isValid = true;
 
-        // Validasi Nama Admin
-        if (namaAdmin.length < 4) {
-            namaAdminError.classList.remove("hidden");
-            isValid = false;
-        } else {
-            namaAdminError.classList.add("hidden");
-        }
+    // Validasi Nama Admin
+    if (namaAdmin.length < 4) {
+        namaAdminError.removeClass("hidden");
+        isValid = false;
+    } else {
+        namaAdminError.addClass("hidden");
+    }
 
-        // Validasi Username
-        if (username.length < 4) {
-            usernameError.classList.remove("hidden");
-            isValid = false;
-        } else {
-            usernameError.classList.add("hidden");
-        }
+    // Validasi Username
+    if (username.length < 4) {
+        usernameError.removeClass("hidden");
+        isValid = false;
+    } else {
+        usernameError.addClass("hidden");
+    }
 
-        // Validasi Ranting
-        if (!ranting) {
-            rantingError.classList.remove("hidden");
-            isValid = false;
-        } else {
-            rantingError.classList.add("hidden");
-        }
+    // Validasi Ranting
+    if (!ranting) {
+        rantingError.removeClass("hidden");
+        isValid = false;
+    } else {
+        rantingError.addClass("hidden");
+    }
 
-        // Validasi Password
-        if (password.length < 6 || password.length > 24) {
-            passwordError.classList.remove("hidden");
-            isValid = false;
-        } else {
-            passwordError.classList.add("hidden");
-        }
+    // Validasi Password
+    if (password.length < 6 || password.length > 24) {
+        passwordError.removeClass("hidden");
+        isValid = false;
+    } else {
+        passwordError.addClass("hidden");
+    }
 
-        // Jika semua validasi benar, kirim form
-        if (isValid) {
-            axios
-                .post("/data-admin/create", {
-                    nama_admin: namaAdmin,
-                    username: username,
-                    password: password,
-                    id_ranting: ranting,
-                })
-                .then((response) => {
-                    document.getElementById("adminForm").reset(); // Mengosongkan semua input dalam form
-                    getAdmin();
-                })
-                .catch((error) => alert(error));
-        }
-    });
+    // Jika semua validasi benar, kirim form
+    if (isValid) {
+        axios
+            .post("/data-admin/create", {
+                nama_admin: namaAdmin,
+                username: username,
+                password: password,
+                id_ranting: ranting,
+            })
+            .then((response) => {
+                $("#adminForm")[0].reset(); // Mengosongkan semua input dalam form
+                fetchAndRenderTable(); // Panggil fungsi untuk memperbarui data
+            })
+            .catch((error) => {
+                console.log(error);
+                alert(error);
+            });
+    }
+});
+

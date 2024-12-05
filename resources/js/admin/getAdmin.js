@@ -1,7 +1,6 @@
 import axios from "axios";
-import $ from "jquery";
+import $, { data } from "jquery";
 
-let resultFetchingAdmin = null;
 let searchValue = '';
 
 function fetchAndRenderTable(searchTerm = "", page = 1) {
@@ -13,7 +12,7 @@ function fetchAndRenderTable(searchTerm = "", page = 1) {
     axios
         .get(url)
         .then((response) => {
-            resultFetchingAdmin = response.data.data;
+            const resultFetchingAdmin = response.data.data;
             const admins = resultFetchingAdmin.data;
             const currentPage = resultFetchingAdmin.current_page;
             const lastPage = resultFetchingAdmin.last_page;
@@ -27,10 +26,9 @@ function fetchAndRenderTable(searchTerm = "", page = 1) {
 
             admins.forEach((admin, index) => {
                 const row = `
-                    <tr data-id="${admin.id
-                    }" class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                    <tr data-id="${admin.id}" class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center">
-                            ${index + 1}
+                        ${admin.id} ${index + 1}
                         </th>
                             <td class="px-6 py-4 text-center">${admin.nama_admin}</td>
                 <td class="px-6 py-4 text-center">${admin.username}</td>
@@ -44,7 +42,7 @@ function fetchAndRenderTable(searchTerm = "", page = 1) {
                         </td>
                         <td class="px-6 py-4 text-center">
                             <div class="inline-flex rounded-md items-center justify-center w-full">
-                                <button type='button' class="edit-btn px-8 py-2 text-sm font-medium text-white bg-green-600 border rounded-s-lg hover:bg-green-500 focus:z-10 focus:ring-2">
+                                <button data-admin='${JSON.stringify(admin)}' type='button' class="edit-btn px-8 py-2 text-sm font-medium text-white bg-green-600 border rounded-s-lg hover:bg-green-500 focus:z-10 focus:ring-2">
                                     Edit
                                 </button>
                                 ${admin.is_active
@@ -83,7 +81,6 @@ function fetchAndRenderTable(searchTerm = "", page = 1) {
 
                 firstPageButton.on("click", (e) => {
                     e.preventDefault();
-                    console.log("ini di awal " + 1);
                     fetchAndRenderTable(searchValue, 1)
 
                 });
@@ -113,7 +110,6 @@ function fetchAndRenderTable(searchTerm = "", page = 1) {
 
                 pageButton.on("click", (e) => {
                     e.preventDefault();
-                    console.log("ini di dalam looping " + page);
                     fetchAndRenderTable(searchValue, page)
                 });
 
@@ -151,7 +147,6 @@ function fetchAndRenderTable(searchTerm = "", page = 1) {
             nextButton.on("click", (e) => {
                 e.preventDefault();
                 if (currentPage < lastPage) {
-                    console.log("Next button clicked");
                     fetchAndRenderTable(searchValue, currentPage + 1)
                 }
             });
@@ -176,4 +171,20 @@ $(document).ready(function () {
         searchValue = $("#search").val().trim(); // Ambil nilai dari input pencarian
         fetchAndRenderTable(searchValue); // Kirim nilai pencarian ke fungsi
     });
+
+    $(document).on("click", ".edit-btn", function () {
+        const admin = $(this).data("admin"); // Ambil data admin dari atribut tombol
+        console.log(admin);
+
+        $("#idAdminEdit").val(admin.id);
+        $("#nama_admin_edit").val(admin.nama_admin);
+        $("#usernameEdit").val(admin.username);
+        $("#passwordEdit").val('');
+        $("#rantingEdit").find(`option[value="${admin.id_ranting}"]`).prop("selected", true);
+
+        $("#containerAdd").addClass("hidden");
+        $("#containerEdit").removeClass("hidden");
+    });
 })
+
+export default fetchAndRenderTable;
