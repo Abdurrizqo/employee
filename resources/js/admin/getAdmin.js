@@ -1,5 +1,5 @@
 import axios from "axios";
-import $, { data } from "jquery";
+import $ from "jquery";
 
 let searchValue = '';
 
@@ -26,9 +26,9 @@ function fetchAndRenderTable(searchTerm = "", page = 1) {
 
             admins.forEach((admin, index) => {
                 const row = `
-                    <tr data-id="${admin.id}" class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                    <tr data-admin='${JSON.stringify(admin)}' class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center">
-                        ${admin.id} ${index + 1}
+                        ${index + 1}
                         </th>
                             <td class="px-6 py-4 text-center">${admin.nama_admin}</td>
                 <td class="px-6 py-4 text-center">${admin.username}</td>
@@ -41,8 +41,8 @@ function fetchAndRenderTable(searchTerm = "", page = 1) {
                             ${admin.is_active ? "Aktif" : "Tidak Aktif"}
                         </td>
                         <td class="px-6 py-4 text-center">
-                            <div class="inline-flex rounded-md items-center justify-center w-full">
-                                <button data-admin='${JSON.stringify(admin)}' type='button' class="edit-btn px-8 py-2 text-sm font-medium text-white bg-green-600 border rounded-s-lg hover:bg-green-500 focus:z-10 focus:ring-2">
+                            <div class="flex rounded-md items-center justify-center w-[16rem]">
+                                <button type='button' class="edit-btn px-8 py-2 text-sm font-medium text-white bg-green-600 border rounded-s-lg hover:bg-green-500 focus:z-10 focus:ring-2">
                                     Edit
                                 </button>
                                 ${admin.is_active
@@ -173,8 +173,7 @@ $(document).ready(function () {
     });
 
     $(document).on("click", ".edit-btn", function () {
-        const admin = $(this).data("admin"); // Ambil data admin dari atribut tombol
-        console.log(admin);
+        const admin = $(this).closest("tr").data("admin");
 
         $("#idAdminEdit").val(admin.id);
         $("#nama_admin_edit").val(admin.nama_admin);
@@ -185,6 +184,184 @@ $(document).ready(function () {
         $("#containerAdd").addClass("hidden");
         $("#containerEdit").removeClass("hidden");
     });
-})
+
+    $(document).on("click", "#btnBatalEdit", function () {
+        $("#idAdminEdit").val('');
+        $("#nama_admin_edit").val('');
+        $("#usernameEdit").val('');
+        $("#passwordEdit").val('');
+        $("#rantingEdit").val('');
+
+        $("#containerAdd").removeClass("hidden");
+        $("#containerEdit").addClass("hidden");
+    })
+
+    $(document).on("click", ".delete-btn", function () {
+        const admin = $(this).closest("tr").data("admin");
+
+        $("#modalDelete").addClass("flex");
+        $("#modalDelete").removeClass("hidden");
+
+        $("#titleModal").text(
+            admin.is_active
+                ? "Nonaktifkan Admin?"
+                : "Aktifkan Admin?"
+        );
+        $("#buttonTextDelete").text(
+            admin.is_active ? "Nonaktifkan" : "Aktifkan"
+        );
+        $("#idDelete").val(admin.id);
+    });
+
+    $(document).on("click", "#btnBatalDelete", function () {
+        $("#modalDelete").removeClass("flex");
+        $("#modalDelete").addClass("hidden");
+        $("#titleModal").text("");
+        $("#buttonTextDelete").text("");
+        $("#idDelete").val("");
+    });
+
+    $(document).on("click", "#btnDelete", function () {
+        $("#spinnerDelete").removeClass("hidden");
+        $("#buttonTextDelete").addClass("hidden");
+        $("#btnBatalDelete").prop("disabled", true);
+
+        const adminId = $("#idDelete").val().trim();
+
+        axios
+            .put(`/data-admin/switch/${adminId}`)
+            .then((response) => {
+                $("#buttonTextDelete").removeClass("hidden");
+                $("#buttonTextDelete").text("");
+                $("#spinnerDelete").addClass("hidden");
+                $("#btnBatalDelete").prop("disabled", false);
+
+                $("#modalDelete").removeClass("flex");
+                $("#modalDelete").addClass("hidden");
+                $("#titleModal").text("");
+                $("#idDelete").val("");
+                showNotification("Edit Admin Berhasil", "successMessage");
+            })
+            .catch((error) => {
+                $("#buttonTextDelete").removeClass("hidden");
+                $("#buttonTextDelete").text("");
+                $("#spinnerDelete").addClass("hidden");
+                $("#btnBatalDelete").prop("disabled", false);
+
+                $("#modalDelete").removeClass("flex");
+                $("#modalDelete").addClass("hidden");
+                $("#titleModal").text("");
+                $("#idDelete").val("");
+                showNotification(`Edit Admin Gagal ${error}`, "errorMessage");
+            });
+    });
+
+    $("#adminFormEdit").on("submit", function (e) {
+        e.preventDefault();
+
+        const $submitButton = $(this).find("button[type='submit']");
+        const $btnBatal = $(this).find("#btnBatalEdit");
+        const $spinner = $(this).find("#spinnerEdit");
+
+        // Sembunyikan tombol Simpan dan Batal
+        $submitButton.addClass("hidden");
+        $btnBatal.addClass("hidden");
+
+        // Tampilkan spinner
+        $spinner.removeClass("hidden");
+        $spinner.addClass("flex");
+
+        const idAdmin = $("#idAdminEdit").val().trim();
+        const namaAdmin = $("#nama_admin_edit").val().trim();
+        const usernameAdmin = $("#usernameEdit").val().trim();
+        const passwordAdmin = $("#passwordEdit").val().trim();
+        const rantingAdmin = $("#rantingEdit").val().trim();
+
+        const formData = {
+            nama_admin: namaAdmin,
+            username: usernameAdmin,
+            password: passwordAdmin,
+            id_ranting: rantingAdmin,
+        };
+
+        // Ambil elemen error
+        const namaAdminError = $("#namaAdminErrorEdit");
+        const usernameError = $("#usernameErrorEdit");
+        const passwordError = $("#passwordErrorEdit");
+        const rantingError = $("#rantingErrorEdit");
+
+        let isValid = true;
+
+        // Validasi Nama Admin
+        if (namaAdmin.length < 4) {
+            namaAdminError.removeClass("hidden");
+            isValid = false;
+        } else {
+            namaAdminError.addClass("hidden");
+        }
+
+        // Validasi Username
+        if (usernameAdmin.length < 4) {
+            usernameError.removeClass("hidden");
+            isValid = false;
+        } else {
+            usernameError.addClass("hidden");
+        }
+
+        // Validasi Ranting
+        if (!rantingAdmin) {
+            rantingError.removeClass("hidden");
+            isValid = false;
+        } else {
+            rantingError.addClass("hidden");
+        }
+
+        // Validasi Password
+        if (passwordAdmin.length < 6 || password.length > 24) {
+            passwordError.removeClass("hidden");
+            isValid = false;
+        } else {
+            passwordError.addClass("hidden");
+        }
+
+        // Jika semua validasi benar, kirim form
+        if (isValid) {
+            axios
+                .put(`/data-admin/update/${idAdmin}`, formData)
+                .then((response) => {
+                    $("#adminFormEdit")[0].reset(); // Mengosongkan semua input dalam form
+                    fetchAndRenderTable(); // Panggil fungsi untuk memperbarui data
+                    showNotification("Edit Admin Berhasil", "successMessage");
+
+                })
+                .catch((error) => {
+                    showNotification(`Edit Admin Gagal ${error}`, "errorMessage");
+                }).finally(() => {
+                    $submitButton.removeClass("hidden");
+                    $btnBatal.removeClass("hidden");
+                    $spinner.addClass("hidden");
+
+                    $("#containerAdd").removeClass("hidden");
+                    $("#containerEdit").addClass("hidden");
+                });
+        }
+    });
+});
+
+function showNotification(message, type) {
+    const notification = $("#notificationMessage");
+
+    notification
+        .removeClass("hidden successMessage errorMessage") // Hapus kelas sebelumnya
+        .addClass(type);
+
+    notification.text(message);
+
+    notification.removeClass("hidden");
+
+    setTimeout(() => {
+        notification.addClass("hidden");
+    }, 4000);
+}
 
 export default fetchAndRenderTable;

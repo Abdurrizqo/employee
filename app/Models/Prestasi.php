@@ -22,6 +22,7 @@ class Prestasi extends Model
         'id_user',
         'prestasi',
         'tahun',
+        'sertifikat_prestasi',
         'tingkat',
     ];
 

@@ -17,9 +17,11 @@ return new class extends Migration
             $table->string('nama_lengkap');
             $table->string('nomer_induk_warga')->unique();
             $table->string('nomer_induk_keluarga');
+            $table->string('kartu_warga')->nullable(); // Nullable
+            $table->string('ktp')->nullable(); // Nullable
             $table->string('tempat_lahir');
             $table->date('tanggal_lahir');
-            $table->boolean('jenis_kelamin'); // Boolean untuk laki-laki/perempuan
+            $table->enum('jenis_kelamin', ['Pria', 'Perempuan']); // Boolean untuk Pria/perempuan
             $table->enum('status_pernikahan', ['Belum Kawin', 'Kawin', 'Duda', 'Janda']);
             $table->text('alamat');
             $table->enum('jenis_pekerjaan', [
@@ -31,7 +33,7 @@ return new class extends Migration
                 'TNI',
                 'POLRI',
                 'Lainnya'
-            ]);
+            ])->nullable();
             $table->string('lembaga_instansi')->nullable(); // Nullable
             $table->text('alamat_lembaga_instansi')->nullable(); // Nullable
             $table->timestamps();

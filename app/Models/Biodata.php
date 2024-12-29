@@ -49,6 +49,8 @@ class Biodata extends Model
         'nomer_induk_warga',
         'nomer_induk_keluarga',
         'tempat_lahir',
+        'kartu_warga',
+        'ktp',
         'tanggal_lahir',
         'jenis_kelamin',
         'status_pernikahan',

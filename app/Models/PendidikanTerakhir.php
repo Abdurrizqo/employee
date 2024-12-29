@@ -23,6 +23,7 @@ class PendidikanTerakhir extends Model
         'pendidikan_terakhir',
         'jurusan',
         'tahun_lulus',
+        'ijazah'
     ];
 
     public function user()

@@ -40,7 +40,7 @@ class Kernel extends HttpKernel
 
         'api' => [
             // \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
-            \Illuminate\Routing\Middleware\ThrottleRequests::class.':api',
+            \Illuminate\Routing\Middleware\ThrottleRequests::class . ':api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
     ];
@@ -56,6 +56,12 @@ class Kernel extends HttpKernel
         'auth' => \App\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'auth.session' => \Illuminate\Session\Middleware\AuthenticateSession::class,
+        'auth.superAdmin' => \App\Http\Middleware\SuperAdminAuntentikasi::class,
+        'auth.Admin' => \App\Http\Middleware\AdminAuntentikasi::class,
+        'auth.User' => \App\Http\Middleware\UserAuntentikasi::class,
+        'auth.TelahLogin' => \App\Http\Middleware\TelahLogin::class,
+        'auth.api.admin' => \App\Http\Middleware\AdminAuntentikasiAPI::class,
+        'auth.api.superAdmin' => \App\Http\Middleware\SuperAdminAuntentikasiAPI::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,

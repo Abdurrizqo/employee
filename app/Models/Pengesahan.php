@@ -23,6 +23,7 @@ class Pengesahan extends Model
         'tingkat',
         'cabang',
         'tahun',
+        'sertifikat_pengesahan',
     ];
 
     public function user()

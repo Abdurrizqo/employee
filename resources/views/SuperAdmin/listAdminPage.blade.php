@@ -81,8 +81,12 @@
 
             <div class="sm:col-start-2 flex justify-end">
                 <button type="submit"
-                    class="w-full sm:w-60 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5">Simpan
-                    Data Admin</button>
+                    class="w-full sm:w-60 flex justify-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5">
+                    <div id="spinnerAdd"
+                        class="w-5 h-5 border-2 border-t-transparent border-white rounded-full animate-spin hidden">
+                    </div>
+                    <p>Simpan Data Admin</p>
+                </button>
             </div>
         </form>
     </div>
@@ -91,6 +95,7 @@
         <form id="adminFormEdit" class="grid grid-cols-1 sm:grid-cols-2 gap-8">
             @csrf
             <input type="hidden" name="idAdminEdit" id="idAdminEdit">
+            
             <div>
                 <label for="nama_admin_edit" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama
                     Admin</label>
@@ -128,7 +133,8 @@
                 <input type="password" id="passwordEdit"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                     placeholder="Password" required />
-                <span id="passwordErrorEdit" class="text-red-500 text-xs hidden">Password minimal 6 karakter dan maksimal 24
+                <span id="passwordErrorEdit" class="text-red-500 text-xs hidden">Password minimal 6 karakter dan maksimal
+                    24
                     karakter</span>
             </div>
 
@@ -139,6 +145,11 @@
                 <button type="submit"
                     class="w-full sm:w-60 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg px-5 py-2.5">Ubah
                     Data Admin</button>
+                <div class="justify-center items-center w-full hidden"  id="spinnerEdit">
+                    <div
+                        class="w-5 h-5 border-[3px] border-t-transparent border-blue-700 rounded-full animate-spin">
+                    </div>
+                </div>
             </div>
         </form>
     </div>

@@ -35,4 +35,8 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Ranting::class, 'id_ranting', 'id');
     }
+
+    protected $hidden = [
+        'password',
+    ];
 }

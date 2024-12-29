@@ -27,6 +27,7 @@ return new class extends Migration
                 'Pasca Sarjana - S2',
                 'Pasca Sarjana - S3'
             ]);
+            $table->string('ijazah')->nullable();
             $table->string('jurusan')->nullable();
             $table->year('tahun_lulus')->nullable();
             $table->timestamps();

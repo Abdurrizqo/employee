@@ -1,6 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wdth,wght@0,75..100,300..800;1,75..100,300..800&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+    font-family: 'Open Sans', sans-serif;
+}
 
 #spinner {
     position: fixed;
@@ -59,3 +64,7 @@
     background-color: #ee9797; /* bg-red-300 */
     color: #b91c1c;           /* text-red-600 */
 }
+
+/* *{
+    border: 1px solid #b91c1c;
+} */

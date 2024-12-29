@@ -16,8 +16,9 @@ return new class extends Migration
             $table->uuid('id_user'); // Foreign Key
             $table->string('sertifikasi');
             $table->year('tahun');
-            $table->enum('tingkat', ['Daerah', 'Provinsi', 'Cabang', 'Nasional', 'Internasional']);
-            $table->string('penyelenggara')->nullable(true);
+            $table->string('penyelenggara');
+            $table->enum('tingkat', ['Internasional','Nasional','Provinsi','Daerah','Cabang']);
+            $table->string('dokumen_sertifikasi')->nullable();
             $table->timestamps();
 
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');

@@ -1,19 +1,25 @@
 import axios from "axios";
-import getAdmin from "./getAdmin";
 import $ from "jquery";
-import fetchAndRenderTable from "../admin/getAdmin";
+import fetchAndRenderTable from "../user/getUser";
 
-$("#adminForm").on("submit", function (event) {
+$("#addForm").on("submit", function (event) {
     event.preventDefault(); // Mencegah pengiriman form jika ada error
 
+    const $submitButton = $(this).find("button[type='submit']");
+    const $spinner = $submitButton.find("#spinnerAdd");
+    const $text = $submitButton.find("p");
+
+    // Saat mulai mengirimkan data
+    $spinner.show(); // Tampilkan spinner
+    $text.hide();
     // Ambil nilai input
-    const namaAdmin = $("#nama_admin").val().trim();
+    const namauser = $("#nama_anggota").val().trim();
     const username = $("#username").val().trim();
     const password = $("#password").val().trim();
     const ranting = $("#ranting").val();
 
     // Ambil elemen error
-    const namaAdminError = $("#namaAdminError");
+    const namaUserError = $("#namaAnggotaError");
     const usernameError = $("#usernameError");
     const passwordError = $("#passwordError");
     const rantingError = $("#rantingError");
@@ -21,11 +27,11 @@ $("#adminForm").on("submit", function (event) {
     let isValid = true;
 
     // Validasi Nama Admin
-    if (namaAdmin.length < 4) {
-        namaAdminError.removeClass("hidden");
+    if (namauser.length < 4) {
+        namaUserError.removeClass("hidden");
         isValid = false;
     } else {
-        namaAdminError.addClass("hidden");
+        namaUserError.addClass("hidden");
     }
 
     // Validasi Username
@@ -55,20 +61,38 @@ $("#adminForm").on("submit", function (event) {
     // Jika semua validasi benar, kirim form
     if (isValid) {
         axios
-            .post("/data-admin/create", {
-                nama_admin: namaAdmin,
+            .post("/data-user/create", {
+                nama_user: namauser,
                 username: username,
                 password: password,
                 id_ranting: ranting,
             })
             .then((response) => {
-                $("#adminForm")[0].reset(); // Mengosongkan semua input dalam form
+                $("#addForm")[0].reset(); // Mengosongkan semua input dalam form
                 fetchAndRenderTable(); // Panggil fungsi untuk memperbarui data
+                showNotification("Tambah Anggota Berhasil", "successMessage");
             })
             .catch((error) => {
-                console.log(error);
-                alert(error);
+                showNotification(`Tambah Anggota Gagal ${error}`, "errorMessage");
+            }).finally(() => {
+                $spinner.hide(); // Tampilkan spinner
+                $text.show();
             });
     }
 });
 
+function showNotification(message, type) {
+    const notification = $("#notificationMessage");
+
+    notification
+        .removeClass("hidden successMessage errorMessage") // Hapus kelas sebelumnya
+        .addClass(type);
+
+    notification.text(message);
+
+    notification.removeClass("hidden");
+
+    setTimeout(() => {
+        notification.addClass("hidden");
+    }, 4000);
+}

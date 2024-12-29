@@ -22,8 +22,9 @@ class Sertifikasi extends Model
         'id_user',
         'sertifikasi',
         'tahun',
-        'tingkat',
         'penyelenggara',
+        'tingkat',
+        'dokumen_sertifikasi',
     ];
 
     public function user()

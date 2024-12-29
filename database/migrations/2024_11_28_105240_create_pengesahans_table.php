@@ -17,6 +17,7 @@ return new class extends Migration
             $table->enum('tingkat', ['Tingkat I', 'Tingkat II', 'Tingkat III']);
             $table->text('cabang');
             $table->year('tahun');
+            $table->string('sertifikat_pengesahan');
             $table->timestamps();
 
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');

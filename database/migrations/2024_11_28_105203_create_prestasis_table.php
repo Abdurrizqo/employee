@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('prestasi');
             $table->year('tahun');
             $table->enum('tingkat', ['Daerah', 'Provinsi', 'Cabang', 'Nasional', 'Internasional']);
+            $table->string('sertifikat_prestasi')->nullable();
             $table->timestamps();
 
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
