@@ -16,7 +16,7 @@
         <h1 class="text-xl md:text-2xl font-medium mb-10">Mohon login terlebih dahulu</h1>
 
 
-        <form method="POST" class="w-3/4 md:w-1/2 lg:w-3/4 text-sm md:text-base">
+        <form method="POST" class="w-full sm:w-3/4 md:w-1/2 lg:w-3/4 text-sm md:text-base">
             @csrf
             <div class="mb-5">
                 <label for="username" class="block mb-2 text-sm font-medium text-gray-900">Username</label>

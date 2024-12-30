@@ -186,7 +186,7 @@
             <div class="flex gap-4 items-center flex-1 mb-8">
                 <form id="searchForm">
                     <input type="text" name="search" id="search" placeholder="cari..."
-                        class="border border-gray-400 rounded-md px-3 sm:w-[20rem] bg-gray-50">
+                        class="border border-gray-400 rounded-md px-3 w-[10rem] sm:w-[20rem] bg-gray-50">
                     <button
                         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5">
                         Cari

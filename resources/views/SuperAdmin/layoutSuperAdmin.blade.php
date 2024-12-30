@@ -9,7 +9,7 @@
     <title>Document</title>
 </head>
 
-<body class="grid grid-cols-[48px_1fr] lg:grid-cols-[200px_1fr] h-screen bg-gray-100">
+<body class="grid grid-cols-[48px_1fr] lg:grid-cols-[200px_1fr] min-h-screen bg-gray-100">
     <!-- Mobile Sidebar -->
     <div
         class="fixed w-[48px] z-10 py-5 lg:hidden flex flex-col items-center gap-4 text-sm border-r bg-gradient-to-b from-blue-500 to-blue-600 text-white h-screen">

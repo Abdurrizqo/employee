@@ -16,16 +16,16 @@ class TelahLogin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!Auth::check()) {
-            return $next($request);
-        } else {
-            if (Auth::guard('guard_super_admin')->check()) {
-                return redirect('/super-admin/dashboard');
-            } elseif (Auth::guard('guard_admin')->check()) {
-                return redirect('/admin/dashboard');
-            } elseif (Auth::guard('guard_user')->check()) {
-                return redirect('/dashboard');
-            }
+        // Periksa login pada masing-masing guard
+        if (Auth::guard('guard_super_admin')->check()) {
+            return redirect('/super-admin/dashboard');
+        } elseif (Auth::guard('guard_admin')->check()) {
+            return redirect('/admin/dashboard');
+        } elseif (Auth::guard('guard_user')->check()) {
+            return redirect('/dashboard');
         }
+
+        // Jika tidak ada yang login, lanjutkan permintaan
+        return $next($request);
     }
 }

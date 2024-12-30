@@ -24,11 +24,17 @@ class ProfileController extends Controller
     {
         $user = Auth::guard('guard_user')->user();
         $biodata = Biodata::where('id_user', $user->id)->first();
+        $niwVal = '';
 
+        if ($biodata) {
+            $niwVal = 'required|string|max:255|unique:biodatas,nomer_induk_warga,' . $biodata->id;
+        } else {
+            $niwVal = 'required|string|max:255|unique:biodatas,nomer_induk_warga';
+        }
         // Validasi input
         $validated = $request->validate([
             'nama_lengkap' => 'required|string|max:255',
-            'nomer_induk_warga' => 'required|string|max:255|unique:biodatas,nomer_induk_warga,' . $biodata->id,
+            'nomer_induk_warga' => $niwVal,
             'nomer_induk_keluarga' => 'required|string|max:255',
             'kartu_warga' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:3072', // Validasi file PDF maksimal 3MB
             'ktp' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:3072', // Validasi file PDF maksimal 3MB
