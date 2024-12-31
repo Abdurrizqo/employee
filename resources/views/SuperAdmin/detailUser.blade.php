@@ -1,4 +1,4 @@
-@extends('Admin.LayoutDashboardAdmin')
+@extends('SuperAdmin.LayoutDetailDashboardAdmin')
 
 @section('content')
     <div class="py-6 px-5">
@@ -6,7 +6,7 @@
         <div class="fixed top-0 bottom-0 left-0 right-0 bg-black/40 justify-center items-center z-30 hidden" id="modalDelete">
             <div class="bg-white w-[80%] md:w-[50%] lg:w-[30%] rounded p-4">
                 <div class="border-b pb-1 text-red-600 font-medium">
-                    <p>Hapus Data Sertifikasi</p>
+                    <p>Hapus Data Pendidikan Akhir</p>
                 </div>
 
                 <div class="my-10">
@@ -39,7 +39,7 @@
         <nav class="flex my-5" aria-label="Breadcrumb">
             <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
                 <li class="inline-flex items-center">
-                    <a href="/admin/dashboard"
+                    <a href="/super-admin/dashboard"
                         class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600">
                         <svg class="w-3 h-3 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                             fill="currentColor" viewBox="0 0 20 20">
@@ -149,14 +149,14 @@
                         <div class="flex items-center bg-gray-100 p-2 text-sm">
                             <div class="w-1/3 text-gray-700">Dokumen</div>
                             <div class="w-1/12 text-center">:</div>
-                            <div class="w-2/3"><a target="#" href="/admin/kartu-warga/{{ $biodata->id }}"
+                            <div class="w-2/3"><a target="#" href="/super-admin/kartu-warga/{{ $biodata->id }}"
                                     class="text-violet-500 font-medium hover:underline">Kartu Warga</a></div>
                         </div>
                         <!-- Baris 14 -->
                         <div class="flex items-center bg-gray-100 p-2 text-sm">
                             <div class="w-1/3 text-gray-700"></div>
                             <div class="w-1/12 text-center"></div>
-                            <div class="w-2/3"><a target="#" href="/admin/ktp-warga/{{ $biodata->id }}"
+                            <div class="w-2/3"><a target="#" href="/super-admin/ktp-warga/{{ $biodata->id }}"
                                     class="text-violet-500 font-medium hover:underline">KTP</a></div>
                         </div>
                     </div>
@@ -440,7 +440,7 @@
             document.getElementById('modalDelete').classList.add('flex');
 
             const deleteLink = document.getElementById('deleteConfirm');
-            deleteLink.setAttribute('href', '/admin/delete-pendidikan-terakhir/' + itemId);
+            deleteLink.setAttribute('href', '/super-admin/delete-pendidikan-terakhir/' + itemId);
         });
 
         // Menangani klik tombol Batal untuk menyembunyikan modal

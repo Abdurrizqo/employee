@@ -17,6 +17,28 @@ class JabatanController extends Controller
         return view('User.dataJabatan', ['jabatan' => $jabatan]);
     }
 
+    public function getJabatanByAdmin($id)
+    {
+        $user = Auth::guard('guard_user')->user();
+
+        $jabatan = Jabatan::where('id_user', $id)->get();
+        return view('Admin.dataJabatan', [
+            'jabatan' => $jabatan,
+            'idUser' => $id
+        ]);
+    }
+
+    public function getJabatanBySuperAdmin($id)
+    {
+        $user = Auth::guard('guard_user')->user();
+
+        $jabatan = Jabatan::where('id_user', $id)->get();
+        return view('SuperAdmin.dataJabatan', [
+            'jabatan' => $jabatan,
+            'idUser' => $id
+        ]);
+    }
+
     public function create(Request $request)
     {
         $validated = $request->validate([

@@ -15,6 +15,7 @@ use App\Http\Controllers\PendidikanTerakhirController;
 use App\Http\Controllers\PrestasiController;
 use App\Http\Controllers\RiwayatPelatihanController;
 use App\Http\Controllers\SertifikasiController;
+use App\Models\PendidikanTerakhir;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -47,6 +48,30 @@ Route::middleware(['auth.superAdmin'])->group(function () {
         Route::get('/dashboard', [DashboardSuperAdmin::class, 'dashboardSuperAdmin']);
         Route::get('/list-ranting', [DashboardSuperAdmin::class, 'listRantingPage']);
         Route::get('/list-admin', [DashboardSuperAdmin::class, 'listAdminPage']);
+
+        Route::get('/detail/{id}', [AdminDashboardController::class, 'detailUserBySuperAdmin']);
+        Route::get('/detail/{id}/data-pengesahan', [PegesahanController::class, 'dataPengesahanBySuperAdmin']);
+        Route::get('/detail/{id}/data-jabatan', [JabatanController::class, 'getJabatanBySuperAdmin']);
+        Route::get('/detail/{id}/prestasi-anggota', [PrestasiController::class, 'getPrestasiBySuperAdmin']);
+        Route::get('/detail/{id}/data-riwayat-pelatihan', [RiwayatPelatihanController::class, 'getRiwayatPelatihanBySuperAdmin']);
+        Route::get('/detail/{id}/riwayat-sertifikasi', [SertifikasiController::class, 'getSertifikasiBySuperAdmin']);
+
+        Route::get('/delete-data-pengesahan/{id}', [PegesahanController::class, 'delete']);
+        Route::get('/delete-sertifikat-pelatihan/{id}', [RiwayatPelatihanController::class, 'delete']);
+        Route::get('/delete-data-jabatan/{id}', [JabatanController::class, 'delete']);
+        Route::get('/delete-riwayat-sertifikasi/{id}', [SertifikasiController::class, 'delete']);
+        Route::get('/delete-prestasi-anggota/{id}', [PrestasiController::class, 'delete']);
+        Route::get('/delete-pendidikan-terakhir/{id}', [PendidikanTerakhirController::class, 'delete']);
+
+        Route::get('/kartu-warga/{id}', [ProfileController::class, 'getKartuWarga']);
+        Route::get('/ktp-warga/{id}', [ProfileController::class, 'getKTP']);
+        Route::get('/sertifikat-pengesahan/{id}', [PegesahanController::class, 'getSertifikatPengesahan']);
+        Route::get('/sertifikat-pelatihan/{id}', [RiwayatPelatihanController::class, 'getSertifikat']);
+        Route::get('/sk-jabatan/{id}', [JabatanController::class, 'getSKJabatan']);
+        Route::get('/dokumen-sertifikasi/{id}', [SertifikasiController::class, 'getDokumenSertifikasi']);
+        Route::get('/ijazah-pendidikan-terakhir/{id}', [PendidikanTerakhirController::class, 'getIjazah']);
+        Route::get('/sertifikat-prestasi/{id}', [PrestasiController::class, 'getSertifikatPrestasi']);
+
         Route::get('/export-warga', [ExportDataController::class, 'exportBySuperAdmin']);
     });
 });
@@ -57,21 +82,48 @@ Route::middleware(['auth.Admin'])->group(function () {
     Route::prefix('admin')->group(function () {
         Route::get('/dashboard', [AdminDashboardController::class, 'dashboardAdmin']);
         Route::get('/detail/{id}', [AdminDashboardController::class, 'detailUser']);
+        Route::get('/detail/{id}/data-pengesahan', [PegesahanController::class, 'dataPengesahanByAdmin']);
+        Route::get('/detail/{id}/data-jabatan', [JabatanController::class, 'getJabatanByAdmin']);
+        Route::get('/detail/{id}/prestasi-anggota', [PrestasiController::class, 'getPrestasiByadmin']);
+        Route::get('/detail/{id}/data-riwayat-pelatihan', [RiwayatPelatihanController::class, 'getRiwayatPelatihanByAdmin']);
+        Route::get('/detail/{id}/riwayat-sertifikasi', [SertifikasiController::class, 'getSertifikasiByAdmin']);
+
+        Route::get('/delete-data-pengesahan/{id}', [PegesahanController::class, 'delete']);
+        Route::get('/delete-sertifikat-pelatihan/{id}', [RiwayatPelatihanController::class, 'delete']);
+        Route::get('/delete-data-jabatan/{id}', [JabatanController::class, 'delete']);
+        Route::get('/delete-riwayat-sertifikasi/{id}', [SertifikasiController::class, 'delete']);
+        Route::get('/delete-prestasi-anggota/{id}', [PrestasiController::class, 'delete']);
+        Route::get('/delete-pendidikan-terakhir/{id}', [PendidikanTerakhirController::class, 'delete']);
+
         Route::get('/export-warga', [ExportDataController::class, 'exportByAdmin']);
+
+        Route::get('/kartu-warga/{id}', [ProfileController::class, 'getKartuWarga']);
+        Route::get('/ktp-warga/{id}', [ProfileController::class, 'getKTP']);
+        Route::get('/sertifikat-pengesahan/{id}', [PegesahanController::class, 'getSertifikatPengesahan']);
+        Route::get('/sertifikat-pelatihan/{id}', [RiwayatPelatihanController::class, 'getSertifikat']);
+        Route::get('/sk-jabatan/{id}', [JabatanController::class, 'getSKJabatan']);
+        Route::get('/dokumen-sertifikasi/{id}', [SertifikasiController::class, 'getDokumenSertifikasi']);
+        Route::get('/ijazah-pendidikan-terakhir/{id}', [PendidikanTerakhirController::class, 'getIjazah']);
+        Route::get('/sertifikat-prestasi/{id}', [PrestasiController::class, 'getSertifikatPrestasi']);
     });
 });
 
 
 Route::middleware(['auth.User'])->group(function () {
-    Route::get('/user-konfigurasi', [ProfileController::class, 'firstTimeLogin']);
-    Route::post('/user-konfigurasi', [UserController::class, 'updateByUser']);
+    Route::middleware(['auth.UserConfigCheck'])->group(function () {
+        Route::get('/user-konfigurasi', [ProfileController::class, 'firstTimeLogin']);
+        Route::post('/user-konfigurasi', [UserController::class, 'updateByUser']);
 
-    Route::get('/kelengkapan-biodata', [ProfileController::class, 'kelengkapanBiodata']);
-    Route::post('/kelengkapan-biodata', [ProfileController::class, 'addOrUpdateBiodata']);
+        Route::get('/kelengkapan-biodata', [ProfileController::class, 'kelengkapanBiodata']);
+        Route::post('/kelengkapan-biodata', [ProfileController::class, 'addOrUpdateBiodata']);
+    });
 
     Route::get('/dashboard', [DashboardUser::class, 'dashboardUserView']);
     Route::get('/dashboard/edit-biodata', [ProfileController::class, 'editBiodataUser']);
     Route::post('/dashboard/edit-biodata', [ProfileController::class, 'addOrUpdateBiodata']);
+
+    Route::get('/dashboard/edit-akun', [UserController::class, 'editUserPage']);
+    Route::post('/dashboard/edit-akun', [UserController::class, 'editAccount']);
 
     Route::get('/kartu-warga/{id}', [ProfileController::class, 'getKartuWarga']);
     Route::get('/ktp-warga/{id}', [ProfileController::class, 'getKTP']);
@@ -99,6 +151,7 @@ Route::middleware(['auth.User'])->group(function () {
     Route::get('/dashboard/prestasi-anggota', [PrestasiController::class, 'getPrestasi']);
     Route::post('/dashboard/prestasi-anggota', [PrestasiController::class, 'create']);
     Route::get('/delete-prestasi-anggota/{id}', [PrestasiController::class, 'delete']);
+    Route::get('/sertifikat-prestasi/{id}', [PrestasiController::class, 'getSertifikatPrestasi']);
 
     Route::get('/dashboard/pendidikan-terakhir', [PendidikanTerakhirController::class, 'formPendidikanTerakhir']);
     Route::post('/dashboard/pendidikan-terakhir', [PendidikanTerakhirController::class, 'handleFormPendidikanTerakhir']);

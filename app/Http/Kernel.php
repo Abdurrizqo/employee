@@ -59,6 +59,7 @@ class Kernel extends HttpKernel
         'auth.superAdmin' => \App\Http\Middleware\SuperAdminAuntentikasi::class,
         'auth.Admin' => \App\Http\Middleware\AdminAuntentikasi::class,
         'auth.User' => \App\Http\Middleware\UserAuntentikasi::class,
+        'auth.UserConfigCheck' => \App\Http\Middleware\UserCheckConfiguration::class,
         'auth.TelahLogin' => \App\Http\Middleware\TelahLogin::class,
         'auth.api.admin' => \App\Http\Middleware\AdminAuntentikasiAPI::class,
         'auth.api.superAdmin' => \App\Http\Middleware\SuperAdminAuntentikasiAPI::class,

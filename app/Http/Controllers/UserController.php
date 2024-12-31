@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -176,7 +177,8 @@ class UserController extends Controller
         ]);
     }
 
-    public function updateByUser(Request $request){
+    public function updateByUser(Request $request)
+    {
         $user = Auth::guard('guard_user')->user();
 
         $dataUser = User::find($user->id);
@@ -192,10 +194,10 @@ class UserController extends Controller
                 'username.string' => 'Username harus berupa teks.',
                 'username.max' => 'Username tidak boleh lebih dari 120 karakter.',
                 'username.unique' => 'Username sudah digunakan. Silakan pilih username lain.',
-            
+
                 'password.string' => 'Password harus berupa teks.',
                 'password.min' => 'Password harus memiliki minimal 6 karakter.',
-            
+
                 'nama_user.required' => 'Nama lengkap wajib diisi.',
                 'nama_user.string' => 'Nama lengkap harus berupa teks.',
                 'nama_user.max' => 'Nama lengkap tidak boleh lebih dari 240 karakter.',
@@ -233,5 +235,47 @@ class UserController extends Controller
             'success' => true,
             'message' => 'User status switched successfully.',
         ]);
+    }
+
+    public function editUserPage()
+    {
+        return view("User.EditUserpage");
+    }
+
+    public function editAccount(Request $request)
+    {
+        // Validasi input
+        $request->validate([
+            'username_lama' => 'required|string',
+            'password_lama' => 'required|string',
+            'username_baru' => 'required|string|unique:users,username',
+            'password_baru' => 'required|string|min:6',
+            'nama_user' => 'nullable|string|min:3|max:240',
+        ]);
+
+        // Dapatkan user yang sedang login
+        $user = Auth::user();
+
+        // Cek apakah username lama cocok dengan username user yang login
+        if ($user->username !== $request->username_lama) {
+            return back()->withErrors(['credentials' => 'Username atau Password tidak sesuai']);
+        }
+
+        // Cek apakah password lama benar
+        if (!Hash::check($request->password_lama, $user->password)) {
+            return back()->withErrors(['credentials' => 'Username atau Password tidak sesuai']);
+        }
+
+        // Update data user
+        $usernameBaru = $request->username_baru;
+        $passwordBaru = Hash::make($request->password_baru);
+
+        User::where('id', $user->id)->update([
+            'username' => $usernameBaru,
+            'password' => $passwordBaru
+        ]);
+
+        // Redirect dengan pesan sukses
+        return redirect()->back()->with('success', 'Akun berhasil diperbarui.');
     }
 }

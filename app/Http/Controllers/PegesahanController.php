@@ -20,6 +20,26 @@ class PegesahanController extends Controller
         ]);
     }
 
+    public function dataPengesahanByAdmin($id)
+    {
+
+        $pengesahan = Pengesahan::where('id_user', $id)->get();
+        return view('Admin.DataPengesahan', [
+            'pengesahan' => $pengesahan,
+            'idUser' => $id
+        ]);
+    }
+
+    public function dataPengesahanBySuperAdmin($id)
+    {
+
+        $pengesahan = Pengesahan::where('id_user', $id)->get();
+        return view('SuperAdmin.DataPengesahan', [
+            'pengesahan' => $pengesahan,
+            'idUser' => $id
+        ]);
+    }
+
     public function create(Request $request)
     {
         $validated = $request->validate([

@@ -17,6 +17,24 @@ class PrestasiController extends Controller
         return view('User.dataPrestasi', ['prestasi' => $prestasi]);
     }
 
+    public function getPrestasiByadmin($id)
+    {
+        $prestasi = Prestasi::where('id_user', $id)->get();
+        return view('Admin.dataPrestasi', [
+            'prestasi' => $prestasi,
+            'idUser' => $id
+        ]);
+    }
+
+    public function getPrestasiBySuperAdmin($id)
+    {
+        $prestasi = Prestasi::where('id_user', $id)->get();
+        return view('SuperAdmin.dataPrestasi', [
+            'prestasi' => $prestasi,
+            'idUser' => $id
+        ]);
+    }
+
     public function create(Request $request)
     {
         $validated = $request->validate([
@@ -24,12 +42,12 @@ class PrestasiController extends Controller
             'prestasi' => 'required|string|max:255',
             'tahun' => 'nullable|digits:4|integer|min:1900|max:' . date('Y'), // Validasi file PDF maksimal 3MB
             'sertifikat_prestasi' => 'nullable|file|mimes:pdf|max:3072', // Validasi file PDF maksimal 3MB
-        ],[
-            'tingkat.in'=>'data Tingkat tidak valid',
-            'prestasi.in'=>'prestasi maksimal 255 karakter',
-            'prestasi.max'=>'tahun tidak dapat lebih dari tahun saat ini',
-            'sertifikat_prestasi.file'=>'sertifikat harus PDF',
-            'sertifikat_prestasi.max'=>'sertifikat maksimal 3mb',
+        ], [
+            'tingkat.in' => 'data Tingkat tidak valid',
+            'prestasi.in' => 'prestasi maksimal 255 karakter',
+            'prestasi.max' => 'tahun tidak dapat lebih dari tahun saat ini',
+            'sertifikat_prestasi.file' => 'sertifikat harus PDF',
+            'sertifikat_prestasi.max' => 'sertifikat maksimal 3mb',
         ]);
 
         try {

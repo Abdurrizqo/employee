@@ -76,4 +76,19 @@ class PendidikanTerakhirController extends Controller
 
         abort(404, 'File tidak ditemukan.');
     }
+
+    public function delete($id)
+    {
+        try {
+            // Cari data berdasarkan ID
+            $item = PendidikanTerakhir::findOrFail($id);
+
+            // Hapus data
+            $item->delete();
+
+            return redirect()->back()->with('success', 'Data berhasil dihapus.');
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['error' => 'Gagal menghapus data: ' . $e->getMessage()]);
+        }
+    }
 }

@@ -42,6 +42,12 @@ class LoginController extends Controller
         ]);
 
         if (Auth::guard('guard_admin')->attempt($validate)) {
+            if (Auth::guard('guard_admin')->user()->is_active) {
+                return back()->withErrors([
+                    'username' => 'Akun Di nonaktifkan.',
+                ])->withInput($request->only('username'));
+            }
+
             $request->session()->regenerate();
             return redirect()->intended('admin/dashboard');
         }
@@ -64,7 +70,17 @@ class LoginController extends Controller
         ]);
 
         if (Auth::guard('guard_user')->attempt($validate)) {
+            if (Auth::guard('guard_user')->user()->is_active) {
+                return back()->withErrors([
+                    'username' => 'Akun Di nonaktifkan.',
+                ])->withInput($request->only('username'));
+            }
+
             $request->session()->regenerate();
+
+            if (Auth::guard('guard_user')->user()->is_open) {
+                return redirect()->intended('dashboard');
+            }
             return redirect()->intended('user-konfigurasi');
         }
 

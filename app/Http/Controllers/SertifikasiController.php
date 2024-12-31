@@ -17,6 +17,24 @@ class SertifikasiController extends Controller
         return view('User.dataSertifikasi', ['sertifikasi' => $sertifikasi]);
     }
 
+    public function getSertifikasiByAdmin($id)
+    {
+        $sertifikasi = Sertifikasi::where('id_user', $id)->get();
+        return view('Admin.dataSertifikasi', [
+            'sertifikasi' => $sertifikasi,
+            'idUser' => $id
+        ]);
+    }
+
+    public function getSertifikasiBySuperAdmin($id)
+    {
+        $sertifikasi = Sertifikasi::where('id_user', $id)->get();
+        return view('SuperAdmin.dataSertifikasi', [
+            'sertifikasi' => $sertifikasi,
+            'idUser' => $id
+        ]);
+    }
+
     public function create(Request $request)
     {
         $validated = $request->validate([
@@ -25,7 +43,7 @@ class SertifikasiController extends Controller
             'penyelenggara' => 'required|string|max:255',
             'sertifikasi' => 'required|string|max:255',
             'tahun' => 'required|digits:4|integer|min:1900|max:' . date('Y'), // Validasi file PDF maksimal 3MB
-        ],[
+        ], [
             'tingkat.in' => "Data tingkat tidak valid",
             'dokumen_sertifikasi.file' => "Bukti sertifikat harus berupa PDF",
             'dokumen_sertifikasi.max' => "Bukti sertifikat harus kurang dari 3mb",

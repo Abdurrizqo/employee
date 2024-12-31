@@ -1,14 +1,15 @@
 import axios from "axios";
 import $ from "jquery";
 
-let searchValue = '';
-
+let searchValue = "";
 
 function fetchAndRenderTable(searchTerm = "", page = 1) {
     $("#spinner").removeClass("hidden"); // Tampilkan spinner
     $("#spinner").addClass("flex");
 
-    const url = `/data-user/all?page=${page}${searchTerm ? `&search=${searchTerm}` : ""}`;
+    const url = `/data-user/all?page=${page}${
+        searchTerm ? `&search=${searchTerm}` : ""
+    }`;
 
     axios
         .get(url)
@@ -24,27 +25,29 @@ function fetchAndRenderTable(searchTerm = "", page = 1) {
             tbody.empty();
             paginationContainer.empty();
 
-
             angotas.forEach((angota, index) => {
                 const row = `
-                    <tr data-anggota='${JSON.stringify(angota)}' class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                    <tr data-anggota='${JSON.stringify(
+                        angota
+                    )}' class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center">
                         ${index + 1}
                         </th>
-                            <td class="px-6 py-4 text-center">${angota.nama_user}</td>
+                            <td class="px-6 py-4 text-center">${
+                                angota.nama_user
+                            }</td>
                 <td class="px-6 py-4 text-center">${angota.username}</td>
-                <td class="px-6 py-4 text-center">${angota.ranting.nama_ranting
-                    }</td>
-                        <td class="px-6 py-4 text-center ${angota.is_active
-                        ? "text-green-500"
-                        : "text-red-500"
-                    }">
+                <td class="px-6 py-4 text-center">${
+                    angota.ranting.nama_ranting
+                }</td>
+                        <td class="px-6 py-4 text-center ${
+                            angota.is_active ? "text-green-500" : "text-red-500"
+                        }">
                             ${angota.is_active ? "Aktif" : "Tidak Aktif"}
                         </td>
-                        <td class="px-6 py-4 text-center ${angota.is_open
-                        ? "text-green-500"
-                        : "text-red-500"
-                    }">
+                        <td class="px-6 py-4 text-center ${
+                            angota.is_open ? "text-green-500" : "text-red-500"
+                        }">
                             ${angota.is_open ? "Lengkap" : "Belum Lengkap"}
                         </td>
                         <td>
@@ -52,10 +55,18 @@ function fetchAndRenderTable(searchTerm = "", page = 1) {
                                 <button type='button' class="edit-btn px-8 py-2 text-sm font-medium text-white bg-green-600 border rounded-md hover:bg-green-500 focus:ring-2">
                                     Edit
                                 </button>
-                                ${angota.is_active
-                        ? "<button type='button' class='delete-btn px-8 py-2 text-sm font-medium text-white bg-red-600 border rounded-md hover:bg-red-500'> Non Aktif </button>"
-                        : "<button type='button' class='delete-btn px-8 py-2 text-sm font-medium text-white bg-blue-600 border rounded-md hover:bg-blue-500'> Aktif </button>"
-                    }
+                                ${
+                                    angota.is_open
+                                        ? `<a href="detail/${angota.id}" type='button' class="px-8 py-2 text-sm font-medium text-white bg-orange-400 border rounded-md hover:bg-orange-500 focus:ring-2">
+                                    Detail
+                                </a>`
+                                        : ""
+                                }
+                                ${
+                                    angota.is_active
+                                        ? "<button type='button' class='delete-btn px-8 py-2 text-sm font-medium text-white bg-red-600 border rounded-md hover:bg-red-500'> Non Aktif </button>"
+                                        : "<button type='button' class='delete-btn px-8 py-2 text-sm font-medium text-white bg-blue-600 border rounded-md hover:bg-blue-500'> Aktif </button>"
+                                }
                             </div>
                         </td>
                     </tr>`;
@@ -63,17 +74,18 @@ function fetchAndRenderTable(searchTerm = "", page = 1) {
             });
 
             //prev button
-            const prevButton = $(`<a href="#" class="flex items-center px-3 h-8 text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 ${currentPage === 1 ? "pointer-events-none opacity-50" : ""
-                }">Previous</a>`);
+            const prevButton = $(
+                `<a href="#" class="flex items-center px-3 h-8 text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 ${
+                    currentPage === 1 ? "pointer-events-none opacity-50" : ""
+                }">Previous</a>`
+            );
 
             prevButton.on("click", (e) => {
                 e.preventDefault();
-                fetchAndRenderTable(searchValue, currentPage - 1)
-
+                fetchAndRenderTable(searchValue, currentPage - 1);
             });
 
             paginationContainer.append(prevButton);
-
 
             //number list
             let startPage = Math.max(1, currentPage - 2); // Awal range
@@ -88,8 +100,7 @@ function fetchAndRenderTable(searchTerm = "", page = 1) {
 
                 firstPageButton.on("click", (e) => {
                     e.preventDefault();
-                    fetchAndRenderTable(searchValue, 1)
-
+                    fetchAndRenderTable(searchValue, 1);
                 });
 
                 paginationContainer.append(firstPageButton);
@@ -108,16 +119,17 @@ function fetchAndRenderTable(searchTerm = "", page = 1) {
             for (let page = startPage; page <= endPage; page++) {
                 const pageButton = $(`
                     <li>
-                        <button class="flex items-center px-3 h-8 ${page === currentPage
-                        ? "text-blue-600 bg-blue-50"
-                        : "text-gray-500 bg-white"
-                    } border border-gray-300 hover:bg-gray-100">${page}</button>
+                        <button class="flex items-center px-3 h-8 ${
+                            page === currentPage
+                                ? "text-blue-600 bg-blue-50"
+                                : "text-gray-500 bg-white"
+                        } border border-gray-300 hover:bg-gray-100">${page}</button>
                     </li>
                 `);
 
                 pageButton.on("click", (e) => {
                     e.preventDefault();
-                    fetchAndRenderTable(searchValue, page)
+                    fetchAndRenderTable(searchValue, page);
                 });
 
                 paginationContainer.append(pageButton);
@@ -141,7 +153,7 @@ function fetchAndRenderTable(searchTerm = "", page = 1) {
 
                 lastPageButton.on("click", (e) => {
                     e.preventDefault();
-                    fetchAndRenderTable(searchValue, lastPage)
+                    fetchAndRenderTable(searchValue, lastPage);
                 });
 
                 paginationContainer.append(lastPageButton);
@@ -149,18 +161,22 @@ function fetchAndRenderTable(searchTerm = "", page = 1) {
 
             // Tombol Next
             const nextButton = $(`
-                                <li><a href="#" class="flex items-center px-3 h-8 text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 ${currentPage === lastPage ? "pointer-events-none opacity-50" : ""}">Next</a></li>`);
+                                <li><a href="#" class="flex items-center px-3 h-8 text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 ${
+                                    currentPage === lastPage
+                                        ? "pointer-events-none opacity-50"
+                                        : ""
+                                }">Next</a></li>`);
 
             nextButton.on("click", (e) => {
                 e.preventDefault();
                 if (currentPage < lastPage) {
-                    fetchAndRenderTable(searchValue, currentPage + 1)
+                    fetchAndRenderTable(searchValue, currentPage + 1);
                 }
             });
 
             paginationContainer.append(nextButton);
-
-        }).catch((error) => {
+        })
+        .catch((error) => {
             alert("Gagal mengambil data. Coba lagi nanti.");
             console.log(error);
         })
@@ -185,23 +201,25 @@ $(document).ready(function () {
         $("#idAnggotaEdit").val(anggota.id);
         $("#nama_anggota_edit").val(anggota.nama_user);
         $("#usernameEdit").val(anggota.username);
-        $("#passwordEdit").val('');
-        $("#rantingEdit").find(`option[value="${anggota.id_ranting}"]`).prop("selected", true);
+        $("#passwordEdit").val("");
+        $("#rantingEdit")
+            .find(`option[value="${anggota.id_ranting}"]`)
+            .prop("selected", true);
 
         $("#containerAdd").addClass("hidden");
         $("#containerEdit").removeClass("hidden");
     });
 
     $(document).on("click", "#btnBatalEdit", function () {
-        $("#idAnggotaEdit").val('');
-        $("#nama_anggota_edit").val('');
-        $("#usernameEdit").val('');
-        $("#passwordEdit").val('');
-        $("#rantingEdit").val('');
+        $("#idAnggotaEdit").val("");
+        $("#nama_anggota_edit").val("");
+        $("#usernameEdit").val("");
+        $("#passwordEdit").val("");
+        $("#rantingEdit").val("");
 
         $("#containerAdd").removeClass("hidden");
         $("#containerEdit").addClass("hidden");
-    })
+    });
 
     $(document).on("click", ".delete-btn", function () {
         const anggota = $(this).closest("tr").data("anggota");
@@ -210,9 +228,7 @@ $(document).ready(function () {
         $("#modalDelete").removeClass("hidden");
 
         $("#titleModal").text(
-            anggota.is_active
-                ? "Nonaktifkan Anggota?"
-                : "Aktifkan Anggota?"
+            anggota.is_active ? "Nonaktifkan Anggota?" : "Aktifkan Anggota?"
         );
         $("#buttonTextDelete").text(
             anggota.is_active ? "Nonaktifkan" : "Aktifkan"
@@ -338,11 +354,14 @@ $(document).ready(function () {
                     $("#editForm")[0].reset(); // Mengosongkan semua input dalam form
                     fetchAndRenderTable(); // Panggil fungsi untuk memperbarui data
                     showNotification("Edit Anggota Berhasil", "successMessage");
-
                 })
                 .catch((error) => {
-                    showNotification(`Edit Anggota Gagal ${error}`, "errorMessage");
-                }).finally(() => {
+                    showNotification(
+                        `Edit Anggota Gagal ${error}`,
+                        "errorMessage"
+                    );
+                })
+                .finally(() => {
                     $submitButton.removeClass("hidden");
                     $btnBatal.removeClass("hidden");
                     $spinner.addClass("hidden");

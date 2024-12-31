@@ -17,6 +17,24 @@ class RiwayatPelatihanController extends Controller
         return view('User.DataRiwayatLatihan', ['riwayatPelatihan' => $riwayatPelatihan]);
     }
 
+    public function getRiwayatPelatihanByAdmin($id)
+    {
+        $riwayatPelatihan = RiwayatLatihan::where('id_user', $id)->get();
+        return view('Admin.DataRiwayatLatihan', [
+            'riwayatPelatihan' => $riwayatPelatihan,
+            'idUser' => $id
+        ]);
+    }
+
+    public function getRiwayatPelatihanBySuperAdmin($id)
+    {
+        $riwayatPelatihan = RiwayatLatihan::where('id_user', $id)->get();
+        return view('SuperAdmin.DataRiwayatLatihan', [
+            'riwayatPelatihan' => $riwayatPelatihan,
+            'idUser' => $id
+        ]);
+    }
+
     public function create(Request $request)
     {
         $validated = $request->validate([
@@ -24,12 +42,12 @@ class RiwayatPelatihanController extends Controller
             'rayon' => 'required|string|max:255',
             'sertifikat' => 'nullable|file|mimes:pdf|max:3072', // Validasi file PDF maksimal 3MB
             'penyelenggara' => 'nullable|string|max:255',
-        ],[
-            'tingkat.in' =>'Data tingkat tidak valid',
-            'rayon.max' =>'Data rayon maksimal 255 karakter',
-            'sertifikat.file' =>'Sertifikat harus dalam bentuk file',
-            'sertifikat.max' =>'Sertifikat maksimal 3mb',
-            'penyelenggara.max' =>'Data penyelenggara maksimal 255 karakter',
+        ], [
+            'tingkat.in' => 'Data tingkat tidak valid',
+            'rayon.max' => 'Data rayon maksimal 255 karakter',
+            'sertifikat.file' => 'Sertifikat harus dalam bentuk file',
+            'sertifikat.max' => 'Sertifikat maksimal 3mb',
+            'penyelenggara.max' => 'Data penyelenggara maksimal 255 karakter',
         ]);
 
         try {
