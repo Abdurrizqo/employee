@@ -1,15 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('Admin.LayoutDashboardAdmin')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <title>Document</title>
-</head>
-
-<body class="bg-gray-100">
+@section('content')
     <div class="fixed top-0 bottom-0 left-0 right-0 bg-black/40 justify-center items-center z-30 hidden" id="modalDelete">
         <div class="bg-white w-[80%] md:w-[50%] lg:w-[30%] rounded p-4">
             <div class="border-b pb-1 text-red-600 font-medium">
@@ -44,20 +35,6 @@
             <div></div>
         </div>
     </div>
-
-    <nav
-        class="w-full flex items-center justify-end gap-5 bg-white border-b border-gray-200 h-20 sticky top-0 z-10 px-10">
-        <p class="text-xl font-medium border-r border-gray-600 pr-10">Halo, <span
-                class="text-blue-700">{{ auth('guard_admin')->user()->nama_admin }}</span></p>
-
-        <a href="/logout" class="active:scale-95">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                stroke="currentColor" class="size-6 text-red-500 hover:text-red-700">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                    d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15m-3 0-3-3m0 0 3-3m-3 3H15" />
-            </svg>
-        </a>
-    </nav>
 
     <div id="notificationMessage" class="border rounded-lg p-3 w-full hidden mt-4"></div>
 
@@ -114,8 +91,7 @@
                 <input type="hidden" name="idAnggotaEdit" id="idAnggotaEdit">
 
                 <div>
-                    <label for="nama_anggota_edit"
-                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama
+                    <label for="nama_anggota_edit" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama
                         Anggota</label>
                     <input type="text" id="nama_anggota_edit"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
@@ -155,8 +131,7 @@
                         class="w-full sm:w-60 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg px-5 py-2.5">Ubah
                         Data Anggota</button>
                     <div class="justify-center items-center w-full hidden" id="spinnerEdit">
-                        <div
-                            class="w-5 h-5 border-[3px] border-t-transparent border-blue-700 rounded-full animate-spin">
+                        <div class="w-5 h-5 border-[3px] border-t-transparent border-blue-700 rounded-full animate-spin">
                         </div>
                     </div>
                 </div>
@@ -235,7 +210,4 @@
     </div>
 
     @vite(['resources/js/user/addUserByAdmin.js', 'resources/js/user/getUserByRanting.js', 'resources/js/user/exportDataByAdmin.js'])
-
-</body>
-
-</html>
+@endsection

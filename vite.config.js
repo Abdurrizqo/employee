@@ -2,12 +2,12 @@ import { defineConfig } from "vite";
 import laravel from "laravel-vite-plugin";
 
 export default defineConfig({
-    server: {
-        host: true, // Mengizinkan koneksi dari jaringan lain
-        hmr: {
-            host: "10.20.31.249", // Ganti dengan IP lokal komputer Anda
-        },
-    },
+    // server: {
+    //     host: true, // Mengizinkan koneksi dari jaringan lain
+    //     hmr: {
+    //         host: "10.20.31.249", // Ganti dengan IP lokal komputer Anda
+    //     },
+    // },
     plugins: [
         laravel({
             input: [

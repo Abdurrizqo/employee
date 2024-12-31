@@ -56,6 +56,7 @@ Route::middleware(['auth.superAdmin'])->group(function () {
 Route::middleware(['auth.Admin'])->group(function () {
     Route::prefix('admin')->group(function () {
         Route::get('/dashboard', [AdminDashboardController::class, 'dashboardAdmin']);
+        Route::get('/detail/{id}', [AdminDashboardController::class, 'detailUser']);
         Route::get('/export-warga', [ExportDataController::class, 'exportByAdmin']);
     });
 });

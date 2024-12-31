@@ -52,9 +52,9 @@ function fetchAndRenderTable(searchTerm = "", page = 1) {
                                 <button type='button' class="edit-btn px-8 py-2 text-sm font-medium text-white bg-green-600 border rounded-md hover:bg-green-500 focus:ring-2">
                                     Edit
                                 </button>
-                                <button type='button' class="edit-btn px-8 py-2 text-sm font-medium text-white bg-orange-400 border rounded-md hover:bg-orange-500 focus:ring-2">
+                                <a href="detail/${angota.id}" type='button' class="px-8 py-2 text-sm font-medium text-white bg-orange-400 border rounded-md hover:bg-orange-500 focus:ring-2">
                                     Detail
-                                </button>
+                                </a>
                                 ${angota.is_active
                         ? "<button type='button' class='delete-btn px-8 py-2 text-sm font-medium text-white bg-red-600 border rounded-md hover:bg-red-500'> Non Aktif </button>"
                         : "<button type='button' class='delete-btn px-8 py-2 text-sm font-medium text-white bg-blue-600 border rounded-md hover:bg-blue-500'> Aktif </button>"

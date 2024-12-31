@@ -10,7 +10,6 @@ use App\Models\Prestasi;
 use App\Models\Ranting;
 use App\Models\RiwayatLatihan;
 use App\Models\Sertifikasi;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardUser extends Controller
