@@ -250,7 +250,6 @@ class UserController extends Controller
             'password_lama' => 'required|string',
             'username_baru' => 'required|string|unique:users,username',
             'password_baru' => 'required|string|min:6',
-            'nama_user' => 'nullable|string|min:3|max:240',
         ]);
 
         // Dapatkan user yang sedang login

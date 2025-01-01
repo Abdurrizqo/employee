@@ -6,10 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link rel="icon" href="{{ asset('asset/Logo-PSHT.png') }}" type="image/x-icon">
     <title>Document</title>
 </head>
 
-<body class="bg-gray-100">
+<body>
     <nav
         class="w-full flex items-center justify-end gap-5 bg-white border-b border-gray-200 h-20 sticky top-0 z-10 px-10">
         <p class="text-xl font-medium border-r border-gray-600 pr-10">Halo, <span

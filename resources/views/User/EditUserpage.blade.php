@@ -57,7 +57,7 @@
                         @enderror
                     </div>
 
-                    <!-- Username Lama -->
+                    <!-- Username Baru -->
                     <div class="border-t-2 border-gray-400 pt-10">
                         <label for="username_baru" class="block mb-2 text-sm font-medium text-gray-900">Username
                             Baru</label>

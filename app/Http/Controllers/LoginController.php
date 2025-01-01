@@ -69,23 +69,23 @@ class LoginController extends Controller
             'password' => 'required|string',
         ]);
 
-        if (Auth::guard('guard_user')->attempt($validate)) {
-            if (Auth::guard('guard_user')->user()->is_active) {
+        $guard = Auth::guard('guard_user');
+        if ($guard->attempt($validate)) {
+            $user = $guard->user();
+
+            if (!$user->is_active) {
                 return back()->withErrors([
-                    'username' => 'Akun Di nonaktifkan.',
+                    'username' => 'Akun Dinonaktifkan.',
                 ])->withInput($request->only('username'));
             }
 
             $request->session()->regenerate();
 
-            if (Auth::guard('guard_user')->user()->is_open) {
-                return redirect()->intended('dashboard');
-            }
-            return redirect()->intended('user-konfigurasi');
+            return redirect()->intended($user->is_open ? 'dashboard' : 'user-konfigurasi');
         }
 
         return back()->withErrors([
-            'username' => 'Username atau Password salah.',
+            'login' => 'Username atau Password salah.',
         ])->withInput($request->only('username'));
     }
 

@@ -4,7 +4,7 @@
     <div class="fixed top-0 bottom-0 left-0 right-0 bg-black/40 justify-center items-center z-30 hidden" id="modalDelete">
         <div class="bg-white w-[80%] md:w-[50%] lg:w-[30%] rounded p-4">
             <div class="border-b pb-1 text-red-600 font-medium">
-                <p>Hapus Data Jabatan</p>
+                <p>Hapus Data Pengesahan</p>
             </div>
 
             <div class="my-10">

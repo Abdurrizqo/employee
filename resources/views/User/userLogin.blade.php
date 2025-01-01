@@ -6,14 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @vite(['resources/css/app.css'])
+    <link rel="icon" href="{{ asset('asset/Logo-PSHT.png') }}" type="image/x-icon">
     <title>Document</title>
 </head>
 
 <body class="bg-white h-screen w-screen p-4 grid grid-cols-1 lg:grid-cols-2">
-    <div class="w-full h-full bg-red-400 hidden lg:block"></div>
+    <div class="w-full h-full hidden lg:block"
+        style="background-image: url('{{ asset('asset/user_bg.jpg') }}'); background-size: cover; background-position: center;">
+    </div>
     <div class="w-full h-full flex flex-col justify-center items-center">
-        <h1 class="text-xl md:text-2xl font-medium mb-2">Hi! Selamat Datang</h1>
-        <h1 class="text-xl md:text-2xl font-medium mb-10">Mohon login terlebih dahulu</h1>
+        <h1 class="text-xl md:text-2xl font-medium mb-2 text-center">Hi! Selamat Datang</h1>
+        <h1 class="text-xl md:text-2xl font-medium mb-10 text-center">Mohon login terlebih dahulu sebagai anggota</h1>
 
 
         <form method="POST" class="w-full sm:w-3/4 md:w-1/2 lg:w-3/4 text-sm md:text-base">

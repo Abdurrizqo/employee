@@ -6,7 +6,7 @@
         <div class="fixed top-0 bottom-0 left-0 right-0 bg-black/40 justify-center items-center z-30 hidden" id="modalDelete">
             <div class="bg-white w-[80%] md:w-[50%] lg:w-[30%] rounded p-4">
                 <div class="border-b pb-1 text-red-600 font-medium">
-                    <p>Hapus Data Sertifikasi</p>
+                    <p>Hapus Data Pendidikan Terakhir</p>
                 </div>
 
                 <div class="my-10">
@@ -86,61 +86,61 @@
                             <div class="w-2/3">{{ $ranting->nama_ranting }}</div>
                         </div>
                         <!-- Baris 3 -->
-                        <div class="flex items-center p-2 text-sm">
+                        <div class="flex items-center bg-gray-100 p-2 text-sm">
                             <div class="w-1/3 text-gray-700">NIK</div>
                             <div class="w-1/12 text-center">:</div>
                             <div class="w-2/3">{{ $biodata->nomer_induk_keluarga }}</div>
                         </div>
                         <!-- Baris 4 -->
-                        <div class="flex items-center bg-gray-100 p-2 text-sm">
+                        <div class="flex items-center p-2 text-sm">
                             <div class="w-1/3 text-gray-700">NIW</div>
                             <div class="w-1/12 text-center">:</div>
                             <div class="w-2/3">{{ $biodata->nomer_induk_warga }}</div>
                         </div>
                         <!-- Baris 5 -->
-                        <div class="flex items-center  p-2 text-sm">
+                        <div class="flex items-center bg-gray-100 p-2 text-sm">
                             <div class="w-1/3 text-gray-700">Tempat Lahir</div>
                             <div class="w-1/12 text-center">:</div>
                             <div class="w-2/3">{{ $biodata->tempat_lahir }}</div>
                         </div>
                         <!-- Baris 6 -->
-                        <div class="flex items-center bg-gray-100 p-2 text-sm">
+                        <div class="flex items-center p-2 text-sm">
                             <div class="w-1/3 text-gray-700">Tanggal Lahir</div>
                             <div class="w-1/12 text-center">:</div>
                             <div class="w-2/3">{{ $biodata->tanggal_lahir }}</div>
                         </div>
                         <!-- Baris 7 -->
-                        <div class="flex items-center p-2 text-sm">
+                        <div class="flex items-center bg-gray-100 p-2 text-sm">
                             <div class="w-1/3 text-gray-700">Jenis Kelamin</div>
                             <div class="w-1/12 text-center">:</div>
                             <div class="w-2/3">{{ $biodata->jenis_kelamin }}</div>
                         </div>
                         <!-- Baris 8 -->
-                        <div class="flex items-center bg-gray-100 p-2 text-sm">
+                        <div class="flex items-center p-2 text-sm">
                             <div class="w-1/3 text-gray-700">Status Pernikahan</div>
                             <div class="w-1/12 text-center">:</div>
                             <div class="w-2/3">{{ $biodata->status_pernikahan }}</div>
                         </div>
                         <!-- Baris 9 -->
-                        <div class="flex items-center p-2 text-sm">
+                        <div class="flex items-center bg-gray-100 p-2 text-sm">
                             <div class="w-1/3 text-gray-700">Alamat</div>
                             <div class="w-1/12 text-center">:</div>
                             <div class="w-2/3">{{ $biodata->alamat }}</div>
                         </div>
                         <!-- Baris 10 -->
-                        <div class="flex items-center bg-gray-100 p-2 text-sm">
+                        <div class="flex items-center p-2 text-sm">
                             <div class="w-1/3 text-gray-700">Jenis Pekerjaan</div>
                             <div class="w-1/12 text-center">:</div>
                             <div class="w-2/3">{{ $biodata->jenis_pekerjaan }}</div>
                         </div>
                         <!-- Baris 11 -->
-                        <div class="flex items-center p-2 text-sm">
+                        <div class="flex items-center bg-gray-100 p-2 text-sm">
                             <div class="w-1/3 text-gray-700">Instansi</div>
                             <div class="w-1/12 text-center">:</div>
                             <div class="w-2/3">{{ $biodata->lembaga_instansi }}</div>
                         </div>
                         <!-- Baris 12 -->
-                        <div class="flex items-center bg-gray-100 p-2 text-sm">
+                        <div class="flex items-center p-2 text-sm">
                             <div class="w-1/3 text-gray-700">Alamat Lembaga / Instansi</div>
                             <div class="w-1/12 text-center">:</div>
                             <div class="w-2/3">{{ $biodata->alamat_lembaga_instansi }}</div>

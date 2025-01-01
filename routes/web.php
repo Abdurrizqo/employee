@@ -29,13 +29,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/logout', [LoginController::class, 'logout']);
-Route::post('/super-admin-login', [LoginController::class, 'handleLoginSuperAdmin']);
-Route::post('/admin-login', [LoginController::class, 'handleLoginAdmin']);
-Route::post('/', [LoginController::class, 'handleLoginUser']);
 
+
+Route::get('/logout', [LoginController::class, 'logout']);
 
 Route::middleware(['auth.TelahLogin'])->group(function () {
+    Route::post('/super-admin-login', [LoginController::class, 'handleLoginSuperAdmin']);
+    Route::post('/admin-login', [LoginController::class, 'handleLoginAdmin']);
+    Route::post('/', [LoginController::class, 'handleLoginUser']);
+
     Route::get('/super-admin-login', [LoginController::class, 'superAdminloginPage']);
 
     Route::get('/admin-login', [LoginController::class, 'adminloginPage']);
