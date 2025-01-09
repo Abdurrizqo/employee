@@ -259,6 +259,7 @@ $(document).ready(function () {
                 $("#modalDelete").addClass("hidden");
                 $("#titleModal").text("");
                 $("#idDelete").val("");
+                fetchAndRenderTable();
                 showNotification("Edit Anggota Berhasil", "successMessage");
             })
             .catch((error) => {

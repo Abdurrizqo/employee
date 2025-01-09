@@ -240,6 +240,7 @@ $(document).ready(function () {
                 $("#modalDelete").addClass("hidden");
                 $("#titleModal").text("");
                 $("#idDelete").val("");
+                fetchAndRenderTable();
                 showNotification("Edit Admin Berhasil", "successMessage");
             })
             .catch((error) => {

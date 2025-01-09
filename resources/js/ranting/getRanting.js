@@ -128,6 +128,7 @@ $(document).ready(function () {
                 $("#modalDelete").addClass("hidden");
                 $("#titleModal").text("");
                 $("#idDelete").val("");
+                fetchAndRenderTable();
                 showNotification("Edit Ranting Berhasil", "successMessage");
             })
             .catch((error) => {

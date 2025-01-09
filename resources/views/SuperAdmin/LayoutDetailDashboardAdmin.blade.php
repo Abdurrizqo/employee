@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="icon" href="{{ asset('asset/Logo-PSHT.png') }}" type="image/x-icon">
-    <title>Document</title>
+    <title>siManiesPSHT - Kutim</title>
 </head>
 
 <body>

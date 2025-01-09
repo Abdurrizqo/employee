@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @vite(['resources/css/app.css'])
-    <title>Document</title>
+    <link rel="icon" href="{{ asset('asset/Logo-PSHT.png') }}" type="image/x-icon">
+    <title>siManiesPSHT - Kutim</title>
 </head>
 
 <body class="bg-white flex items-center justify-center p-4">
